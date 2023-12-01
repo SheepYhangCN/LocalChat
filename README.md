@@ -13,6 +13,9 @@ Godot 4.2 Stable Mono Official<br>
 MIT License
 
 ## To-do List
+Message Time<br>
 Localization<br>
 Member List<br>
-Sending Image
+Sending Image<br>
+Sending Files<br>
+Sounds
