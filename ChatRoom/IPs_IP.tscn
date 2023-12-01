@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://sufd0y6afs22"]
+
+[node name="IPsIp" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "114.514.1919.810"

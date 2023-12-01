@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://butexi7vqkx51"]
+
+[ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_7wdxc"]
+[ext_resource type="Script" path="res://ChatRoom/Member.cs" id="2_a7gb6"]
+
+[node name="Member" type="HBoxContainer"]
+offset_right = 356.0
+offset_bottom = 48.0
+theme = ExtResource("1_7wdxc")
+script = ExtResource("2_a7gb6")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "傻逼1145"
+
+[node name="ID" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " (1145141919)"

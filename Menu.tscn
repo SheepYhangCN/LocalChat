@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu5ucrk0ggc8y"]
+
+[ext_resource type="Script" path="res://ip.cs" id="1_gk3ve"]
+[ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_ord5l"]
+[ext_resource type="Script" path="res://Menu.cs" id="2_fual7"]
+[ext_resource type="Script" path="res://LineEdit1.cs" id="4_pcdne"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ord5l")
+script = ExtResource("2_fual7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -68.5
+offset_right = 206.0
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ip" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "【你的IP】
+114.514.1919.810
+114.114.114.114
+8.8.8.8
+0.0.0.0"
+horizontal_alignment = 1
+script = ExtResource("1_gk3ve")
+
+[node name="LineEdit1" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+placeholder_text = "在此输入你的用户名"
+max_length = 16
+script = ExtResource("4_pcdne")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Create" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "创建聊天室"
+
+[node name="Space" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Join" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "加入聊天室"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]

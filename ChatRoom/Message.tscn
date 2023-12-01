@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl855nur4wyah"]
+
+[ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_32wmn"]
+[ext_resource type="Script" path="res://ChatRoom/Message.cs" id="2_gn2uh"]
+
+[node name="Message" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_32wmn")
+script = ExtResource("2_gn2uh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "114514"
+
+[node name="ID" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "(1)"
+
+[node name="Colon" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ": "
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Message" type="Label" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(1244, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "你玩原神吗"
+autowrap_mode = 3

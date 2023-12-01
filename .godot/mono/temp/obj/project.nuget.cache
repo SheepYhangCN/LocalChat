@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "21z4dtlqYaA+Fg1kvO7NLL1kzkBsxQ2RHRkE0xgWuZr4tC0Y9na0uT36sgNg6VBqUjshRKFXmz+jVpMDhMSltg==",
+  "success": true,
+  "projectFilePath": "G:\\LocalChat\\LocalChat.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SheepYhangCN\\.nuget\\packages\\godot.sourcegenerators\\4.2.0\\godot.sourcegenerators.4.2.0.nupkg.sha512",
+    "C:\\Users\\SheepYhangCN\\.nuget\\packages\\godotsharp\\4.2.0\\godotsharp.4.2.0.nupkg.sha512",
+    "C:\\Users\\SheepYhangCN\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.0\\microsoft.netcore.app.runtime.win-x64.8.0.0.nupkg.sha512",
+    "C:\\Users\\SheepYhangCN\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.0.nupkg.sha512",
+    "C:\\Users\\SheepYhangCN\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.0\\microsoft.aspnetcore.app.runtime.win-x64.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
