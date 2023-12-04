@@ -42,9 +42,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer2"]
+
 [node name="Message" type="Label" parent="HBoxContainer2"]
 custom_minimum_size = Vector2(1244, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "你玩原神吗"
 autowrap_mode = 3

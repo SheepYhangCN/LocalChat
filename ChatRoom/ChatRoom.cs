@@ -100,6 +100,18 @@ public partial class ChatRoom : Control
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+	internal void SendImage(int peer,string name,string time,Texture2D image)
+	{
+		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+		GD.Print("[Image]"+name+"("+peer.ToString()+")");
+		var ins=message_packed.Instantiate<Message>();
+		ins.peer=peer;
+		ins.name=name;
+		ins.time=time;
+		ins.image=image;
+		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
+	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendSystemMessage(string message)
 	{
 		GetNode<List>("List").Update();
