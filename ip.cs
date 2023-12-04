@@ -11,7 +11,7 @@ public partial class ip : Label
 		{
 			ip+="\n"+ips[a];
 		}
-		Text="【你的IP】"+ip+"\n";
+		Text=TranslationServer.Translate("locYourIPs")+ip+"\n";
 	}
 
 	public override void _Process(double delta)

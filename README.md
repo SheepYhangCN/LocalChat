@@ -15,8 +15,8 @@ MIT License
 ## To-do List
 - [x] Enter to Send<br>
 - [x] Message Time<br>
-- [ ] Localization<br>
-- [ ] Member List<br>
+- [x] Localization<br>
+- [ ] Sounds<br>
 - [ ] Sending Image<br>
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead<br>
-- [ ] Sounds
+- [ ] Member List

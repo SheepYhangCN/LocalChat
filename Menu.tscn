@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu5ucrk0ggc8y"]
+[gd_scene load_steps=7 format=3 uid="uid://bu5ucrk0ggc8y"]
 
 [ext_resource type="Script" path="res://ip.cs" id="1_gk3ve"]
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_ord5l"]
 [ext_resource type="Script" path="res://Menu.cs" id="2_fual7"]
 [ext_resource type="Script" path="res://LineEdit1.cs" id="4_pcdne"]
+[ext_resource type="FontFile" uid="uid://dkfrthtudolt0" path="res://Fonts/unifont.otf" id="5_k4xlc"]
+
+[sub_resource type="Theme" id="Theme_wrw2w"]
+default_font = ExtResource("5_k4xlc")
+default_font_size = 48
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -44,7 +49,7 @@ script = ExtResource("1_gk3ve")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-placeholder_text = "在此输入你的用户名"
+placeholder_text = "locInputUsername"
 max_length = 16
 script = ExtResource("4_pcdne")
 
@@ -54,7 +59,7 @@ layout_mode = 2
 [node name="Create" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "创建聊天室"
+text = "locCreateChatroom"
 
 [node name="Space" type="Control" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -63,7 +68,24 @@ size_flags_horizontal = 3
 [node name="Join" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "加入聊天室"
+text = "locJoinChatroom"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 20.0
+theme = SubResource("Theme_wrw2w")
+item_count = 4
+selected = 0
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "简体中文"
+popup/item_1/id = 1
+popup/item_2/text = "繁體中文"
+popup/item_2/id = 2
+popup/item_3/text = "日本語"
+popup/item_3/id = 3
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

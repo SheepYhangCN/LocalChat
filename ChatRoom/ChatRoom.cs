@@ -10,13 +10,13 @@ public partial class ChatRoom : Control
 	{
 		Multiplayer.ServerDisconnected+=disconnected;
 		Multiplayer.MultiplayerPeer.SetTargetPeer((int)MultiplayerPeer.TargetPeerBroadcast);
-		GetNode<Label>("VBoxContainer/Title/Panel/Label").Text="当前用户名: "+GetNode<AutoLoad>("/root/AutoLoad").name+" ("+Multiplayer.GetUniqueId().ToString()+")";
+		GetNode<Label>("VBoxContainer/Title/Panel/Label").Text=TranslationServer.Translate("locCurrentUsername")+GetNode<AutoLoad>("/root/AutoLoad").name+" ("+Multiplayer.GetUniqueId().ToString()+")";
 		if (Multiplayer.IsServer())
 		{
-			GetNode<Button>("VBoxContainer/Title/Quit").Text="关闭聊天室";
+			GetNode<Button>("VBoxContainer/Title/Quit").Text=TranslationServer.Translate("locCloseChatroom");
 		}
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+" 加入了聊天室！");
-		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+" 加入了聊天室！");
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
 	}
 
 	public override void _Process(double delta)
@@ -26,8 +26,8 @@ public partial class ChatRoom : Control
 	public async void _on_quit_pressed()
 	{
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+" 退出了聊天室！");
-		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+" 退出了聊天室！");
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		if (Multiplayer.IsServer()){
 			var peers=Multiplayer.GetPeers();

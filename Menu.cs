@@ -5,6 +5,22 @@ public partial class Menu : Control
 {
 	public override void _Ready()
 	{
+		var node=GetNode<OptionButton>("OptionButton");
+		switch (TranslationServer.GetLocale())
+		{
+			case "en":
+				node.Selected=0;
+				break;
+			case "zh_CN":
+				node.Selected=1;
+				break;
+			case "zh_TW":
+				node.Selected=2;
+				break;
+			case "ja":
+				node.Selected=3;
+				break;
+		}
 	}
 
 	public override void _Process(double delta)
@@ -47,6 +63,30 @@ public partial class Menu : Control
 		GetNode<AutoLoad>("/root/AutoLoad").name=GetNode<LineEdit>("VBoxContainer/LineEdit1").Text;
 		SaveName(GetNode<LineEdit>("VBoxContainer/LineEdit1").Text);
 		GetTree().ChangeSceneToFile("res://Join.tscn");
+	}
+
+	public void _on_option_button_item_selected(int selected)
+	{
+		switch (selected)
+		{
+			case 0:
+				TranslationServer.SetLocale("en");
+				break;
+			case 1:
+				TranslationServer.SetLocale("zh_CN");
+				break;
+			case 2:
+				TranslationServer.SetLocale("zh_TW");
+				break;
+			case 3:
+				TranslationServer.SetLocale("ja");
+				break;
+		}
+		GetNode<ip>("VBoxContainer/ip")._Ready();
+		var save=new ConfigFile();
+		save.Load("user://LocalChat.ini");
+		save.SetValue("Settings","Language",TranslationServer.GetLocale());
+		save.Save("user://LocalChat.ini");
 	}
 
 	private static void SaveName(string name)

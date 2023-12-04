@@ -30,7 +30,7 @@ layout_mode = 2
 [node name="Quit" type="Button" parent="VBoxContainer/Title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "退出聊天室"
+text = "locQuitChatroom"
 
 [node name="Panel" type="Panel" parent="VBoxContainer/Title"]
 layout_mode = 2
@@ -51,7 +51,7 @@ vertical_alignment = 1
 [node name="IPs" type="Button" parent="VBoxContainer/Title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "查看IP地址"
+text = "locCheckIPs"
 
 [node name="Panel" type="Panel" parent="VBoxContainer"]
 layout_mode = 2
@@ -76,7 +76,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-placeholder_text = "Enter 来发送，Shift+Enter 来换行"
+placeholder_text = "locEnter2Send"
 scroll_smooth = true
 caret_blink = true
 script = ExtResource("3_v3ekq")
@@ -92,7 +92,7 @@ size_flags_vertical = 3
 [node name="Button" type="Button" parent="VBoxContainer/Input/Send"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = " 发送 "
+text = "locSend"
 
 [node name="MemberList" type="Button" parent="."]
 visible = false
@@ -147,7 +147,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="IPs/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "（单击任意处关闭）"
+text = "locAnywhere2Close"
 
 [node name="Port" type="Label" parent="IPs/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -157,7 +157,7 @@ text = "端口: 1145"
 [node name="IPs" type="Label" parent="IPs/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "【IP地址】"
+text = "locIPs"
 
 [node name="List" type="Button" parent="."]
 visible = false
@@ -193,7 +193,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="List/Panel/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "（单击任意处关闭）"
+text = "locAnywhere2Close"
 
 [connection signal="pressed" from="VBoxContainer/Title/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="VBoxContainer/Title/IPs" to="." method="_on_i_ps_pressed"]

@@ -1,0 +1,24 @@
+keys;en;zh_CN;zh_TW;ja
+locYourIPs;[Your IPs];【你的 IP】;【你的 IP】;「君のIPアドレス」
+locInputUsername;Input your Username here;在此输入你的用户名;在此輸入你的使用者名稱;ここにユーザー名を入力してください
+locCreateChatroom;Host ChatRoom;创建聊天室;建立聊天室;主催チャットルーム
+locJoinChatroom;Join ChatRoom;加入聊天室;加入聊天室;チャットルームに参加
+locBack;Back;返回;返回;戻る
+locHost;Host;创建;建立;主催
+locJoin;Join;加入;加入;に参加
+locConnect;Connect;连接;連線;せつぞく
+locIP;IP Address;IP 地址;IP 位址;IPアドレス
+locPort;Port ;端口 ;埠口 ;ポート
+locPortColon;Port: ;端口：;埠口：;ポート：
+locPortHere;Room Port here;在此输入房间端口号;在此輸入房間埠口號碼;
+locUDPOnly;(Use UDP only, no TCP usage);（仅使用UDP，不使用TCP）;（僅使用UDP，不使用TCP）;（UDPのみ使用、TCPは使用しない）
+locQuitChatroom;Quit ChatRoom;退出聊天室;退出聊天室;から去る
+locCloseChatroom;Close ChatRoom;关闭聊天室;關閉聊天室;閉じる
+locCheckIPs;Check IPs;查看 IP 地址;查看 IP 位址;IPアドレスの表示
+locCurrentUsername;Current Username: ;当前用户名：;當前使用者名稱：;現在のユーザー名：
+locJoined; joined Chat Room!; 加入了聊天室！; 加入了聊天室！; がチャットルームに参加！
+locQuitted; quitted Chat Room; 退出了聊天室; 退出了聊天室; がチャットルームを出る
+locEnter2Send;Enter to Send, Shift+Enter to wrap;Enter 来发送，Shift+Enter 来换行;Enter 來發送，Shift+Enter 來換行;Enterが送信し、Shift+Enterが改行する
+locSend; Send ; 发送 ; 發送 ; 送信 
+locAnywhere2Close;(Click anywhere to Close);（单击任意处关闭）;（點擊任意處關閉）;（任意の場所をクリックして閉じる）
+locIPs;[IP Addresses];【IP 地址】;【IP 位址】;「IPアドレス」

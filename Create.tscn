@@ -30,7 +30,7 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "（仅使用UDP，不使用TCP）"
+text = "locUDPOnly"
 horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
@@ -39,14 +39,14 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "端口"
+text = "locPort"
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "1145"
-placeholder_text = "在此输入房间端口号"
+placeholder_text = "locPortHere"
 max_length = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -55,7 +55,7 @@ layout_mode = 2
 [node name="Back" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "返回"
+text = "locBack"
 
 [node name="Space" type="Control" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -64,7 +64,7 @@ size_flags_horizontal = 3
 [node name="Create" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "创建"
+text = "locHost"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]

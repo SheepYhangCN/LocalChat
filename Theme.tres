@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://bog7fmp8wgt7w"]
 
-[ext_resource type="FontFile" uid="uid://dpaonut0f2ciw" path="res://unifont.otf" id="1_dbrk1"]
+[ext_resource type="FontFile" uid="uid://dkfrthtudolt0" path="res://Fonts/unifont.otf" id="1_w5h7n"]
 
 [resource]
-default_font = ExtResource("1_dbrk1")
+default_font = ExtResource("1_w5h7n")

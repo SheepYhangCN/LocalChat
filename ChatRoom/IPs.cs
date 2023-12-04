@@ -5,6 +5,7 @@ public partial class IPs : Button
 {
 	public override void _Ready()
 	{
+		GetNode<Label>("Panel/ScrollContainer/VBoxContainer/Port").Text=TranslationServer.Translate("locPortColon")+GetNode<AutoLoad>("/root/AutoLoad").port.ToString();
 		var scene=GD.Load<PackedScene>("res://ChatRoom/IPs_IP.tscn");
 		if (Multiplayer.IsServer())
 		{

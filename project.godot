@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LocalChat"
-run/main_scene="res://Menu.tscn"
+run/main_scene="res://Init.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="LocalChat"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
@@ -34,6 +34,13 @@ project/assembly_name="LocalChat"
 [gui]
 
 fonts/dynamic_fonts/use_oversampling=false
+
+[internationalization]
+
+locale/translation_remaps={
+"res://Fonts/unifont.otf": PackedStringArray("res://Fonts/unifont_jp.otf:ja")
+}
+locale/translations=PackedStringArray("res://Locale/Locale.en.translation", "res://Locale/Locale.zh_CN.translation", "res://Locale/Locale.zh_TW.translation", "res://Locale/Locale.ja.translation")
 
 [rendering]
 

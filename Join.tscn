@@ -34,12 +34,12 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-placeholder_text = "IP地址"
+placeholder_text = "locIP"
 
 [node name="LineEdit2" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-placeholder_text = "端口 "
+placeholder_text = "locPort"
 max_length = 5
 expand_to_text_length = true
 
@@ -49,7 +49,7 @@ layout_mode = 2
 [node name="Back" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "返回"
+text = "locBack"
 
 [node name="Space" type="Control" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -58,7 +58,7 @@ size_flags_horizontal = 3
 [node name="Join" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "连接"
+text = "locConnect"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
