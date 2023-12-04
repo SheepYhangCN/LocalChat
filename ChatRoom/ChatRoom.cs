@@ -75,8 +75,8 @@ public partial class ChatRoom : Control
 			{
 				text=text.TrimSuffix("\n")+"\n ";
 			}
-			SendMessage(Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,text);
-			Rpc("SendMessage",Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,text);
+			SendMessage(Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,Time.GetDatetimeStringFromSystem(false,true),text);
+			Rpc("SendMessage",Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,Time.GetDatetimeStringFromSystem(false,true),text);
 			GetNode<TextEdit>("VBoxContainer/Input/Text").Text="";
 		}
 	}
@@ -88,12 +88,13 @@ public partial class ChatRoom : Control
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void SendMessage(int peer,string name,string message)
+	internal void SendMessage(int peer,string name,string time,string message)
 	{
 		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
 		ins.peer=peer;
 		ins.name=name;
+		ins.time=time;
 		ins.message=message;
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
@@ -102,7 +103,7 @@ public partial class ChatRoom : Control
 	{
 		GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
-		ins.GetNode<Label>("PanelContainer/Message").Text=message;
+		ins.GetNode<Label>("PanelContainer/Message").Text="["+Time.GetDatetimeStringFromSystem(false,true)+"]\n"+message;
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]

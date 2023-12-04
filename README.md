@@ -7,15 +7,16 @@ My teachers are really fond of unplugging the network cable between switcher and
 
 ## Environment Dependence
 Godot 4.2 Stable Mono Official<br>
-.NET 8.0.100
+.NET 8.0.100 (well actually, .net8 is not necessary, if you want to use other version of .net, just change the `TargetFramework` in `LocalChat.csproj`)
 
 ## Open-source License
 MIT License
 
 ## To-do List
-Message Time<br>
-Localization<br>
-Member List<br>
-Sending Image<br>
-Sending Files<br>
-Sounds
+- [x] Enter to Send<br>
+- [x] Message Time<br>
+- [ ] Localization<br>
+- [ ] Member List<br>
+- [ ] Sending Image<br>
+- [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead<br>
+- [ ] Sounds

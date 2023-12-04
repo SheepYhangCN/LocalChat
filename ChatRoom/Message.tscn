@@ -25,6 +25,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "(1)"
 
+[node name="Time" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "[1919.8.10 11:45:14]"
+
 [node name="Colon" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
