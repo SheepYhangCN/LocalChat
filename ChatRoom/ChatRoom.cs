@@ -65,8 +65,18 @@ public partial class ChatRoom : Control
 	{
 		if (GetNode<TextEdit>("VBoxContainer/Input/Text").Text!="")
 		{
-			SendMessage(Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,GetNode<TextEdit>("VBoxContainer/Input/Text").Text);
-			Rpc("SendMessage",Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,GetNode<TextEdit>("VBoxContainer/Input/Text").Text);
+			var text=GetNode<TextEdit>("VBoxContainer/Input/Text").Text;
+			text=text.Replace("\n\n","\n \n").Replace("\n\n","\n \n");
+			if (text.StartsWith("\n"))
+			{
+				text=" \n"+text.TrimPrefix("\n");
+			}
+			else if (text.EndsWith("\n"))
+			{
+				text=text.TrimSuffix("\n")+"\n ";
+			}
+			SendMessage(Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,text);
+			Rpc("SendMessage",Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,text);
 			GetNode<TextEdit>("VBoxContainer/Input/Text").Text="";
 		}
 	}
@@ -80,6 +90,7 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendMessage(int peer,string name,string message)
 	{
+		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
 		ins.peer=peer;
 		ins.name=name;

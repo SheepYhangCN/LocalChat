@@ -35,7 +35,10 @@ public partial class Create : Control
 		var server=new ENetMultiplayerPeer();
 		var err=server.CreateServer(port);
 		Multiplayer.MultiplayerPeer=server;
-		GetTree().ChangeSceneToFile("res://ChatRoom/ChatRoom.tscn");
+		if (err==Error.Ok)
+		{
+			GetTree().ChangeSceneToFile("res://ChatRoom/ChatRoom.tscn");
+		}
 		GD.Print(err.ToString()+" "+port.ToString()+" ");
 	}
 

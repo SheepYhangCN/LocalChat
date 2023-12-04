@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4uan2ws0t731"]
+[gd_scene load_steps=6 format=3 uid="uid://c4uan2ws0t731"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_8lss0"]
 [ext_resource type="Script" path="res://ChatRoom/ChatRoom.cs" id="2_nhktq"]
+[ext_resource type="Script" path="res://ChatRoom/Text.cs" id="3_v3ekq"]
 [ext_resource type="Script" path="res://ChatRoom/IPs.cs" id="3_xkmtu"]
 [ext_resource type="Script" path="res://ChatRoom/List.cs" id="4_cm86d"]
 
@@ -75,14 +76,16 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-placeholder_text = "在这没有任何限制的局域网聊天室中畅所欲言吧！"
+placeholder_text = "Enter 来发送，Shift+Enter 来换行"
 scroll_smooth = true
-scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("3_v3ekq")
 
 [node name="Send" type="VBoxContainer" parent="VBoxContainer/Input"]
 layout_mode = 2
 
 [node name="Space" type="Control" parent="VBoxContainer/Input/Send"]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_vertical = 3
 
