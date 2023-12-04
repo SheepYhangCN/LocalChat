@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4uan2ws0t731"]
+[gd_scene load_steps=6 format=3 uid="uid://c4uan2ws0t731"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_8lss0"]
 [ext_resource type="Script" path="res://ChatRoom/ChatRoom.cs" id="2_nhktq"]
 [ext_resource type="Script" path="res://ChatRoom/Text.cs" id="3_v3ekq"]
 [ext_resource type="Script" path="res://ChatRoom/IPs.cs" id="3_xkmtu"]
-[ext_resource type="Script" path="res://ChatRoom/List.cs" id="4_cm86d"]
 [ext_resource type="AudioStream" uid="uid://be35bebo2vva7" path="res://notification.wav" id="6_3v3ha"]
 
 [node name="ChatRoom" type="Control"]
@@ -96,7 +95,6 @@ theme_override_font_sizes/font_size = 64
 text = "locSend"
 
 [node name="MemberList" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -109,10 +107,7 @@ offset_bottom = 100.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
-text = "成
-员
-列
-表"
+text = "locMemberList"
 
 [node name="IPs" type="Button" parent="."]
 visible = false
@@ -170,7 +165,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("4_cm86d")
 
 [node name="Panel" type="Panel" parent="List"]
 layout_mode = 0

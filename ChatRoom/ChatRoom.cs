@@ -6,6 +6,7 @@ public partial class ChatRoom : Control
 {
 	PackedScene message_packed=GD.Load<PackedScene>("res://ChatRoom/Message.tscn");
 	PackedScene sys_message_packed=GD.Load<PackedScene>("res://ChatRoom/SystemMessage.tscn");
+	PackedScene member=GD.Load<PackedScene>("res://ChatRoom/Members_Member.tscn");
 	public override void _Ready()
 	{
 		Multiplayer.ServerDisconnected+=disconnected;
@@ -14,6 +15,12 @@ public partial class ChatRoom : Control
 		if (Multiplayer.IsServer())
 		{
 			GetNode<Button>("VBoxContainer/Title/Quit").Text=TranslationServer.Translate("locCloseChatroom");
+			Joined(GetNode<AutoLoad>("/root/AutoLoad").name,Multiplayer.MultiplayerPeer.GetUniqueId());
+		}
+		else
+		{
+			Rpc("Joined",GetNode<AutoLoad>("/root/AutoLoad").name,Multiplayer.MultiplayerPeer.GetUniqueId());
+			RpcId(MultiplayerPeer.TargetPeerServer,"SyncMemberList",Multiplayer.MultiplayerPeer.GetUniqueId());
 		}
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
@@ -26,6 +33,8 @@ public partial class ChatRoom : Control
 	public async void _on_quit_pressed()
 	{
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
+		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
+		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
@@ -114,19 +123,39 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendSystemMessage(string message)
 	{
-		GetNode<List>("List").Update();
+		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
 		ins.GetNode<Label>("PanelContainer/Message").Text="["+Time.GetDatetimeStringFromSystem(false,true)+"]\n"+message;
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void GetInfo(int from)
+	internal void Joined(string name,int peer)
 	{
-		RpcId(from,"Receive",(Variant)new Godot.Collections.Array(){Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name});
+		var ins=member.Instantiate<Members_Member>();
+		ins.name=name;
+		ins.peer=peer;
+		GetNode<VBoxContainer>("List/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void Receive(Variant anything)
+	internal void Quitted(int peer)
 	{
-		GetNode<AutoLoad>("/root/AutoLoad").received=anything;
+		var children=GetNode<VBoxContainer>("List/Panel/ScrollContainer/VBoxContainer").GetChildren();
+		for (var a=0;a<children.Count;a+=1)
+		{
+			if (children[a] is Members_Member && (int)children[a].Get("peer")==peer)
+			{
+				children[a].QueueFree();
+			}
+		}
+	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+	internal void SyncMemberList(int peer)
+	{
+		var children=GetNode<VBoxContainer>("List/Panel/ScrollContainer/VBoxContainer").GetChildren();
+		children.RemoveAt(0);
+		for (var a=0;a<children.Count;a+=1)
+		{
+			RpcId(peer,"Joined",children[a].Get("name"),children[a].Get("peer"));
+		}
 	}
 }

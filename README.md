@@ -17,6 +17,6 @@ MIT License
 - [x] Message Time<br>
 - [x] Localization<br>
 - [x] Sounds (From [Mixkit](https://mixkit.co))<br>
+- [x] Member List
 - [ ] Sending Image<br>
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead<br>
-- [ ] Member List

@@ -22,3 +22,4 @@ locEnter2Send;Enter to Send, Shift+Enter to wrap;Enter 来发送，Shift+Enter �
 locSend; Send ; 发送 ; 發送 ; 送信 
 locAnywhere2Close;(Click anywhere to Close);（单击任意处关闭）;（點擊任意處關閉）;（任意の場所をクリックして閉じる）
 locIPs;[IP Addresses];【IP 地址】;【IP 位址】;「IPアドレス」
+locMemberList;Member\nList;成\n员\n列\n表;成\n員\n列\n表;メン\nバー\nリスト
