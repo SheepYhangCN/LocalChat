@@ -90,6 +90,7 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendMessage(int peer,string name,string time,string message)
 	{
+		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
 		ins.peer=peer;

@@ -16,7 +16,7 @@ MIT License
 - [x] Enter to Send<br>
 - [x] Message Time<br>
 - [x] Localization<br>
-- [ ] Sounds<br>
+- [x] Sounds (From [Mixkit](https://mixkit.co))<br>
 - [ ] Sending Image<br>
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead<br>
 - [ ] Member List
