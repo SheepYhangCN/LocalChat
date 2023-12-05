@@ -20,3 +20,19 @@ text = "114514"
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "(1)"
+
+[node name="Space" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Actions" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Remove" type="Button" parent="Actions"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "locRemoveMember"
+
+[connection signal="pressed" from="Actions/Remove" to="." method="_on_remove_pressed"]

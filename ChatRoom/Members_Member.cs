@@ -9,9 +9,22 @@ public partial class Members_Member : HBoxContainer
 	{
 		GetNode<Label>("Name").Text=name;
 		GetNode<Label>("ID").Text="("+peer.ToString()+")";
+		if (Multiplayer.IsServer())
+		{
+			GetNode<Button>("Actions/Remove").Visible=true;
+		}
 	}
 
 	public override void _Process(double delta)
 	{
+		if (peer!=Multiplayer.MultiplayerPeer.GetUniqueId())
+		{
+			GetNode<VBoxContainer>("Actions").Visible=new Rect2(GlobalPosition,Size).HasPoint(GetGlobalMousePosition());
+		}
+	}
+
+	public void _on_remove_pressed()
+	{
+		GetNode<ChatRoom>("../../../../../").RpcId(peer,"Removed");
 	}
 }

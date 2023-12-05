@@ -39,13 +39,33 @@ text = ": "
 layout_mode = 2
 
 [node name="Space" type="Control" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="HBoxContainer2"]
 
 [node name="Message" type="Label" parent="HBoxContainer2"]
-custom_minimum_size = Vector2(1244, 0)
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
+
+[node name="Actions" type="VBoxContainer" parent="HBoxContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="Copy" type="Button" parent="HBoxContainer2/Actions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "locCopy"
+
+[node name="Delete" type="Button" parent="HBoxContainer2/Actions"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "locDelete"
+
+[connection signal="pressed" from="HBoxContainer2/Actions/Copy" to="." method="_on_copy_pressed"]
+[connection signal="pressed" from="HBoxContainer2/Actions/Delete" to="." method="_on_delete_pressed"]

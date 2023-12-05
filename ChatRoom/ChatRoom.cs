@@ -158,4 +158,18 @@ public partial class ChatRoom : Control
 			RpcId(peer,"Joined",children[a].Get("name"),children[a].Get("peer"));
 		}
 	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+	internal async void Removed()
+	{
+		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
+		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
+		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
+		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+		Multiplayer.MultiplayerPeer.Close();
+		Multiplayer.MultiplayerPeer=null;
+		GetNode<AutoLoad>("/root/AutoLoad").removed=true;
+		GetTree().ChangeSceneToFile("res://Menu.tscn");
+	}
 }

@@ -13,10 +13,13 @@ Godot 4.2 Stable Mono Official<br>
 MIT License
 
 ## To-do List
-- [x] Enter to Send<br>
-- [x] Message Time<br>
-- [x] Localization<br>
-- [x] Sounds (From [Mixkit](https://mixkit.co))<br>
+- [x] Enter to Send
+- [x] Message Tim
+- [x] Localization
+- [x] Sounds (From [Mixkit](https://mixkit.co))
 - [x] Member List
-- [ ] Sending Image<br>
-- [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead<br>
+- [x] Copy Message
+- [x] Delete Message
+- [x] Remove Member
+- [ ] Sending Image
+- [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead

@@ -21,6 +21,11 @@ public partial class Menu : Control
 				node.Selected=3;
 				break;
 		}
+		if (GetNode<AutoLoad>("/root/AutoLoad").removed)
+		{
+			GetNode<AutoLoad>("/root/AutoLoad").removed=false;
+			GetNode<Panel>("Removed").Visible=true;
+		}
 	}
 
 	public override void _Process(double delta)
@@ -87,6 +92,11 @@ public partial class Menu : Control
 		save.Load("user://LocalChat.ini");
 		save.SetValue("Settings","Language",TranslationServer.GetLocale());
 		save.Save("user://LocalChat.ini");
+	}
+
+	public void _on_ok_pressed()
+	{
+		GetNode<Panel>("Removed").Visible=false;
 	}
 
 	private static void SaveName(string name)
