@@ -11,7 +11,7 @@ public partial class Members_Member : HBoxContainer
 		GetNode<Label>("ID").Text="("+peer.ToString()+")";
 		if (Multiplayer.IsServer())
 		{
-			GetNode<Button>("Actions/Remove").Visible=true;
+			GetNode<Button>("Actions/Remove").Modulate=new Color(1,1,1,1);
 		}
 	}
 
@@ -19,7 +19,7 @@ public partial class Members_Member : HBoxContainer
 	{
 		if (peer!=Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
-			GetNode<VBoxContainer>("Actions").Visible=new Rect2(GlobalPosition,Size).HasPoint(GetGlobalMousePosition());
+			GetNode<VBoxContainer>("Actions").Modulate=new Color(1,1,1,new Rect2(GlobalPosition,Size).HasPoint(GetGlobalMousePosition()) ? 1 : 0);
 		}
 	}
 

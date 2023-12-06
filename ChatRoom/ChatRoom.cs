@@ -7,6 +7,7 @@ public partial class ChatRoom : Control
 	PackedScene message_packed=GD.Load<PackedScene>("res://ChatRoom/Message.tscn");
 	PackedScene sys_message_packed=GD.Load<PackedScene>("res://ChatRoom/SystemMessage.tscn");
 	PackedScene member=GD.Load<PackedScene>("res://ChatRoom/Members_Member.tscn");
+	internal int message_id_next=0;
 	public override void _Ready()
 	{
 		Multiplayer.ServerDisconnected+=disconnected;
@@ -20,10 +21,10 @@ public partial class ChatRoom : Control
 		else
 		{
 			Rpc("Joined",GetNode<AutoLoad>("/root/AutoLoad").name,Multiplayer.MultiplayerPeer.GetUniqueId());
-			RpcId(MultiplayerPeer.TargetPeerServer,"SyncMemberList",Multiplayer.MultiplayerPeer.GetUniqueId());
+			RpcId(MultiplayerPeer.TargetPeerServer,"SyncFromServer",Multiplayer.MultiplayerPeer.GetUniqueId());
 		}
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locJoined"));
 	}
 
 	public override void _Process(double delta)
@@ -35,8 +36,8 @@ public partial class ChatRoom : Control
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
 		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locQuitted"));
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		if (Multiplayer.IsServer()){
 			var peers=Multiplayer.GetPeers();
@@ -102,6 +103,8 @@ public partial class ChatRoom : Control
 		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
+		ins.id=message_id_next;
+		message_id_next+=1;
 		ins.peer=peer;
 		ins.name=name;
 		ins.time=time;
@@ -114,6 +117,8 @@ public partial class ChatRoom : Control
 		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		GD.Print("[Image]"+name+"("+peer.ToString()+")");
 		var ins=message_packed.Instantiate<Message>();
+		ins.id=message_id_next;
+		message_id_next+=1;
 		ins.peer=peer;
 		ins.name=name;
 		ins.time=time;
@@ -125,6 +130,8 @@ public partial class ChatRoom : Control
 	{
 		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
+		/*ins.id=message_id_next;
+		message_id_next+=1;*/
 		ins.GetNode<Label>("PanelContainer/Message").Text="["+Time.GetDatetimeStringFromSystem(false,true)+"]\n"+message;
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
@@ -149,7 +156,7 @@ public partial class ChatRoom : Control
 		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void SyncMemberList(int peer)
+	internal void SyncFromServer(int peer)
 	{
 		var children=GetNode<VBoxContainer>("List/Panel/ScrollContainer/VBoxContainer").GetChildren();
 		children.RemoveAt(0);
@@ -157,6 +164,7 @@ public partial class ChatRoom : Control
 		{
 			RpcId(peer,"Joined",children[a].Get("name"),children[a].Get("peer"));
 		}
+		RpcId(peer,"SetNextMessageId",message_id_next);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal async void Removed()
@@ -164,12 +172,29 @@ public partial class ChatRoom : Control
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
 		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
 		GetNode<AutoLoad>("/root/AutoLoad").removed=true;
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
+	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+	internal void DeleteMessage(int id)
+	{
+		var children=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").GetChildren();
+		for (var a=0;a<children.Count;a+=1)
+		{
+			if ((int)children[a].Get("id")==id)
+			{
+				children[a].QueueFree();
+			}
+		}
+	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+	internal void SetNextMessageId(int id)
+	{
+		message_id_next=id;
 	}
 }

@@ -26,11 +26,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Actions" type="VBoxContainer" parent="."]
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="Remove" type="Button" parent="Actions"]
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "locRemoveMember"
