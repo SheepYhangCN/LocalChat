@@ -25,7 +25,16 @@ public partial class Message : HBoxContainer
 
 	public override void _Process(double delta)
 	{
-		GetNode<VBoxContainer>("Actions").Modulate=new Color(1,1,1,(new Rect2(GlobalPosition,Size).HasPoint(GetGlobalMousePosition()) && !GetNode<IPs>("../../../../../IPs").Visible && !GetNode<Button>("../../../../../List").Visible) ? 1 : 0);;
+		var children=GetNode<CharRoom>("../../../../../").GetChildren();
+		var visible_test=true;
+		for (var a=0;a<children.Length;a+=1)
+		{
+			if (!(children[a] is VBoxContainer) && children[a].Visible)
+			{
+				visible_test=false;
+			}
+		}
+		GetNode<VBoxContainer>("Actions").Modulate=new Color(1,1,1,(new Rect2(GlobalPosition,Size).HasPoint(GetGlobalMousePosition()) && visible_test) ? 1 : 0);;
 	}
 
 	public void _on_copy_pressed()
