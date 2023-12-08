@@ -86,7 +86,7 @@ popup/item_2/id = 2
 popup/item_3/text = "日本語"
 popup/item_3/id = 3
 
-[node name="Removed" type="Panel" parent="."]
+[node name="Popup" type="Panel" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -96,7 +96,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Removed"]
+[node name="PanelContainer" type="PanelContainer" parent="Popup"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -110,13 +110,13 @@ offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Removed/PanelContainer"]
+[node name="Label" type="Label" parent="Popup/PanelContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "locYouWasRemoved"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="Removed"]
+[node name="PanelContainer2" type="PanelContainer" parent="Popup"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -130,7 +130,7 @@ offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Removed/PanelContainer2"]
+[node name="Button" type="Button" parent="Popup/PanelContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -140,4 +140,4 @@ text = " OK "
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="pressed" from="Removed/PanelContainer2/Button" to="." method="_on_ok_pressed"]
+[connection signal="pressed" from="Popup/PanelContainer2/Button" to="." method="_on_ok_pressed"]

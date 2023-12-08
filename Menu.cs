@@ -6,6 +6,7 @@ public partial class Menu : Control
 	public override void _Ready()
 	{
 		var node=GetNode<OptionButton>("OptionButton");
+		var autoload=GetNode<AutoLoad>("/root/AutoLoad");
 		switch (TranslationServer.GetLocale())
 		{
 			case "en":
@@ -21,10 +22,19 @@ public partial class Menu : Control
 				node.Selected=3;
 				break;
 		}
-		if (GetNode<AutoLoad>("/root/AutoLoad").removed)
+		if (autoload.popup)
 		{
-			GetNode<AutoLoad>("/root/AutoLoad").removed=false;
-			GetNode<Panel>("Removed").Visible=true;
+			if (autoload.is_connection_lost)
+			{
+				GetNode<Label>("Popup/PanelContainer/Label").Text="locConnectionLost";
+			}
+			else
+			{
+				GetNode<Label>("Popup/PanelContainer/Label").Text="locYouWasRemoved";
+			}
+			autoload.popup=false;
+			autoload.is_connection_lost=false;
+			GetNode<Panel>("Popup").Visible=true;
 		}
 	}
 
@@ -96,7 +106,7 @@ public partial class Menu : Control
 
 	public void _on_ok_pressed()
 	{
-		GetNode<Panel>("Removed").Visible=false;
+		GetNode<Panel>("Popup").Visible=false;
 	}
 
 	private static void SaveName(string name)
