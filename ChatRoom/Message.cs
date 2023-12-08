@@ -26,6 +26,7 @@ public partial class Message : HBoxContainer
 		}
 		GetNode<Label>("VBoxContainer/HBoxContainer/DebugID").Text=id.ToString();
 		GetNode<Control>("Space").CustomMinimumSize=new Vector2(GetNode<Button>("../../../../../MemberList").Size.X,0);
+		//GetNode<Label>("VBoxContainer/HBoxContainer2/Message").CustomMinimumSize=new Vector2(1280-32-GetNode<VBoxContainer>("Actions").Size.X-GetNode<Control>("Space").Size.X,0);
 	}
 
 	public override void _Process(double delta)
