@@ -75,5 +75,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "locDelete"
 
+[node name="Space" type="Control" parent="."]
+layout_mode = 2
+
 [connection signal="pressed" from="Actions/Copy" to="." method="_on_copy_pressed"]
 [connection signal="pressed" from="Actions/Delete" to="." method="_on_delete_pressed"]
