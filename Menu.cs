@@ -22,17 +22,29 @@ public partial class Menu : Control
 				node.Selected=3;
 				break;
 		}
-		if (autoload.popup)
+		GetNode<Label>("Version").Text=autoload.version;
+		if (autoload.popup >= 1)
 		{
-			if (autoload.is_connection_lost)
+			if (autoload.popup == 1)
 			{
-				GetNode<Label>("Popup/PanelContainer/Label").Text="locConnectionLost";
+				if (autoload.is_connection_lost)
+				{
+					GetNode<Label>("Popup/PanelContainer/Label").Text="locConnectionLost";
+				}
+				else
+				{
+					GetNode<Label>("Popup/PanelContainer/Label").Text="locYouWasRemoved";
+				}
 			}
-			else
+			else if (autoload.popup == 2)
 			{
-				GetNode<Label>("Popup/PanelContainer/Label").Text="locYouWasRemoved";
+				GetNode<Label>("Popup/PanelContainer/Label").Text="locSha256DoesntMatch";
 			}
-			autoload.popup=false;
+			else if (autoload.popup == 3)
+			{
+				GetNode<Label>("Popup/PanelContainer/Label").Text="locVersionDoesntMatch";
+			}
+			autoload.popup=0;
 			autoload.is_connection_lost=false;
 			GetNode<Panel>("Popup").Visible=true;
 		}

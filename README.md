@@ -6,7 +6,7 @@ I made this because i want to chat with my classmates in information technology 
 My teachers are really fond of unplugging the network cable between switcher and the router.
 
 ## Environment Dependence
-Godot 4.2 Stable Mono Official<br>
+Godot 4.2.1 Stable Mono Official<br>
 .NET 8.0.100 (well actually, .net8 is not necessary, if you want to use other version of .net, just change the `TargetFramework` in `LocalChat.csproj`)
 
 ## Open-source License
@@ -14,12 +14,14 @@ MIT License
 
 ## To-do List
 - [x] Enter to Send
-- [x] Message Tim
+- [x] Message Time
 - [x] Localization
 - [x] Sounds (From [Mixkit](https://mixkit.co))
 - [x] Member List
 - [x] Copy Message
 - [x] Delete Message
 - [x] Remove Member
+- [x] Add Version Check
+- [ ] Add Sha256 Check
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead

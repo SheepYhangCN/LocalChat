@@ -137,6 +137,18 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 48
 text = " OK "
 
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_right = 144.0
+grow_vertical = 0
+theme = ExtResource("1_ord5l")
+theme_override_font_sizes/font_size = 32
+text = "v2024.1.1"
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

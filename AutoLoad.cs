@@ -6,8 +6,9 @@ public partial class AutoLoad : Node
 	internal string name="";
 	internal string ip="127.0.0.1";
 	internal int port=1145;
-	internal bool popup=false;
+	internal int popup=0;
 	internal bool is_connection_lost=false;
+	internal string version="v2023.12.26";
 	public override void _Ready()
 	{
 	}
