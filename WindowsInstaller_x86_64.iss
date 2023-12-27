@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=D:\GodotProjects\Exports\LocalChat
-OutputBaseFilename=LocalChat_WindowsInstaller
+OutputBaseFilename=LocalChat_Windows_x86_64
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -38,8 +38,8 @@ Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\GodotProjects\Exports\LocalChat\LocalChat\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\GodotProjects\Exports\LocalChat\LocalChat\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\GodotProjects\Exports\LocalChat\LocalChat_Windows_x86_64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\GodotProjects\Exports\LocalChat\LocalChat_Windows_x86_64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
