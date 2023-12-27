@@ -7,7 +7,8 @@ My teachers are really fond of unplugging the network cable between switcher and
 
 ## Environment Dependence
 Godot 4.2.1 Stable Mono Official<br>
-.NET 8.0.100 (well actually, .net8 is not necessary, if you want to use other version of .net, just change the `TargetFramework` in `LocalChat.csproj`)
+.NET 8.0.100 (well actually, .net8 is not necessary, if you want to use other version of .net, just change the `TargetFramework` in `LocalChat.csproj`)<br>
+Inno Setup (If you want to compile ```.exe``` installer)
 
 ## Open-source License
 MIT License
@@ -23,5 +24,6 @@ MIT License
 - [x] Remove Member
 - [x] Add Version Check
 - [ ] Add Sha256 Check
+- [x] Add Installer
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
