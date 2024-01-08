@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "LocalChat"
-#define MyAppVersion "2023.12.26"
+#define MyAppVersion "2024.1.8"
 #define MyAppPublisher "SheepYhangCN"
 #define MyAppURL "https://github.com/SheepYhangCN/LocalChat"
 #define MyAppExeName "LocalChat.exe"

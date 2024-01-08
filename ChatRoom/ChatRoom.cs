@@ -25,10 +25,10 @@ public partial class ChatRoom : Control
 		{
 			Rpc("Joined",autoload.name,Multiplayer.MultiplayerPeer.GetUniqueId());
 			RpcId(MultiplayerPeer.TargetPeerServer,"SyncFromServer",Multiplayer.MultiplayerPeer.GetUniqueId());
-			/*if (OS.GetName()=="Windows" ||OS.GetName()=="macOS"||OS.GetName()=="Linux")
+			if (OS.GetName()=="Windows" ||OS.GetName()=="macOS"||OS.GetName()=="Linux")
 			{
-				RpcId(MultiplayerPeer.TargetPeerServer,"Sha256Check",Multiplayer.MultiplayerPeer.GetUniqueId(),FileAccess.GetSha256(OS.GetExecutablePath()));
-			}*/
+				RpcId(MultiplayerPeer.TargetPeerServer,"Sha256Check",Multiplayer.MultiplayerPeer.GetUniqueId(),FileAccess.GetSha256(OS.GetExecutablePath()),OS.GetName());
+			}
 			RpcId(MultiplayerPeer.TargetPeerServer,"VersionCheck",Multiplayer.MultiplayerPeer.GetUniqueId(),autoload.version);
 		}
 		SendSystemMessage(autoload.name+TranslationServer.Translate("locJoined"));
@@ -241,9 +241,9 @@ public partial class ChatRoom : Control
 		member_list=member_lista;
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void Sha256Check(int peer,string sha256)
+	internal void Sha256Check(int peer,string sha256,string os)
 	{
-		if (sha256 != FileAccess.GetSha256(OS.GetExecutablePath()))
+		if (os==OS.GetName() && sha256 != FileAccess.GetSha256(OS.GetExecutablePath()))
 		{
 			RpcId(peer,"Sha256DoesntMatch");
 		}

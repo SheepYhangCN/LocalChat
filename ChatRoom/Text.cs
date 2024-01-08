@@ -43,7 +43,7 @@ public partial class Text : TextEdit
 				{
 					if (enterable)
 					{
-						Text=Text.TrimSuffix("\n");
+						Backspace();
 						GetNode<ChatRoom>("../../../")._on_send_pressed();
 					}
 				}
