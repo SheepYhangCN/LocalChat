@@ -23,7 +23,7 @@ MIT License
 - [x] Delete Message
 - [x] Remove Member
 - [x] Add Version Check
-- [ ] Add Sha256 Check
+- [x] Add Sha256 Check
 - [x] Add Installer
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
