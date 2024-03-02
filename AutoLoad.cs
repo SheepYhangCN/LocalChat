@@ -8,7 +8,7 @@ public partial class AutoLoad : Node
 	internal int port=1145;
 	internal int popup=0;
 	internal bool is_connection_lost=false;
-	internal string version="v2024.1.8";
+	internal string version="v2024.3.3";
 	public override void _Ready()
 	{
 	}

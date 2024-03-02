@@ -25,11 +25,15 @@ public partial class ChatRoom : Control
 		{
 			Rpc("Joined",autoload.name,Multiplayer.MultiplayerPeer.GetUniqueId());
 			RpcId(MultiplayerPeer.TargetPeerServer,"SyncFromServer",Multiplayer.MultiplayerPeer.GetUniqueId());
-			if (OS.GetName()=="Windows" ||OS.GetName()=="macOS"||OS.GetName()=="Linux")
+			//if (OS.GetName()=="Windows" || OS.GetName()=="macOS" || OS.GetName()=="Linux")
+			if (OS.HasFeature("pc"))
 			{
-				RpcId(MultiplayerPeer.TargetPeerServer,"Sha256Check",Multiplayer.MultiplayerPeer.GetUniqueId(),FileAccess.GetSha256(OS.GetExecutablePath()),OS.GetName());
+				RpcId(MultiplayerPeer.TargetPeerServer,"Sha256Check",Multiplayer.MultiplayerPeer.GetUniqueId(),FileAccess.GetSha256(OS.GetExecutablePath()),OS.GetName(),OS.HasFeature("64"),OS.HasFeature("32"),OS.HasFeature("x86"),OS.HasFeature("arm"),OS.HasFeature("riscv"),OS.HasFeature("ppc"),OS.HasFeature("wasm"));
 			}
-			RpcId(MultiplayerPeer.TargetPeerServer,"VersionCheck",Multiplayer.MultiplayerPeer.GetUniqueId(),autoload.version);
+			else
+			{
+				RpcId(MultiplayerPeer.TargetPeerServer,"VersionCheck",Multiplayer.MultiplayerPeer.GetUniqueId(),autoload.version);
+			}
 		}
 		SendSystemMessage(autoload.name+TranslationServer.Translate("locJoined"));
 		Rpc("SendSystemMessage",autoload.name+TranslationServer.Translate("locJoined"));
@@ -135,7 +139,11 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendMessage(int peer,string name,string time,string message)
 	{
-		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
+		{
+			DisplayServer.WindowRequestAttention();
+			GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+		}
 		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
 		ins.id=message_id_next;
@@ -241,9 +249,9 @@ public partial class ChatRoom : Control
 		member_list=member_lista;
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void Sha256Check(int peer,string sha256,string os)
+	internal void Sha256Check(int peer,string sha256,string os,bool x64,bool x32,bool x86,bool arm,bool riscv,bool ppc,bool wasm)
 	{
-		if (os==OS.GetName() && sha256 != FileAccess.GetSha256(OS.GetExecutablePath()))
+		if (os == OS.GetName() && OS.HasFeature("64") == x64 && OS.HasFeature("32") == x32 && OS.HasFeature("x86") == x86 && OS.HasFeature("arm") == arm && OS.HasFeature("riscv") == riscv && OS.HasFeature("ppc") == ppc && OS.HasFeature("wasm") == wasm && sha256 != FileAccess.GetSha256(OS.GetExecutablePath()))
 		{
 			RpcId(peer,"Sha256DoesntMatch");
 		}

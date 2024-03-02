@@ -25,5 +25,7 @@ MIT License
 - [x] Add Version Check
 - [x] Add Sha256 Check
 - [x] Add Installer
+- [x] Taskbar alert when received new message
+- [ ] Roll to bottom when received new message
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
