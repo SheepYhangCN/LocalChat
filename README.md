@@ -27,5 +27,7 @@ MIT License
 - [x] Add Installer
 - [x] Taskbar alert when received new message
 - [ ] Roll to bottom when received new message
+- [ ] Text box go to top when open Input method in mobile
+- [ ] Add scroll bar in Main Menu to avoid too much IP addresses
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
