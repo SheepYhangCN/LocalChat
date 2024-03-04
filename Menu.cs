@@ -48,6 +48,7 @@ public partial class Menu : Control
 			autoload.is_connection_lost=false;
 			GetNode<Panel>("Popup").Visible=true;
 		}
+		ContainerUpdate(GetNode<VBoxContainer>("VBoxContainer"));
 	}
 
 	public override void _Process(double delta)
@@ -114,6 +115,7 @@ public partial class Menu : Control
 		save.Load("user://LocalChat.ini");
 		save.SetValue("Settings","Language",TranslationServer.GetLocale());
 		save.Save("user://LocalChat.ini");
+		ContainerUpdate(GetNode<VBoxContainer>("VBoxContainer"));
 	}
 
 	public void _on_ok_pressed()
@@ -127,5 +129,11 @@ public partial class Menu : Control
 		save.Load("user://LocalChat.ini");
 		save.SetValue("User","Name",name);
 		save.Save("user://LocalChat.ini");
+	}
+
+	private static void ContainerUpdate(VBoxContainer n)
+	{
+		n.Size=new Vector2(n.GetCombinedMinimumSize().X,n.Size.Y);
+		n.Position=new Vector2(640-n.Size.X/2,n.Position.Y);
 	}
 }

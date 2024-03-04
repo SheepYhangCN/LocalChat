@@ -27,8 +27,8 @@ MIT License
 - [x] Add Installer
 - [x] Taskbar alert when received new message
 - [ ] Roll to bottom when received new message
+- [x] Add scroll bar in Main Menu to avoid too much IP addresses
 - [ ] Text box go to top when open Input method in mobile
-- [ ] Add scroll bar in Main Menu to avoid too much IP addresses
 - [ ] Add a Chat Room lobby, add public and private option
 - [ ] Add desktop notification
 - [ ] Allow user to ping someone
