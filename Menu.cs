@@ -110,7 +110,7 @@ public partial class Menu : Control
 				TranslationServer.SetLocale("ja");
 				break;
 		}
-		GetNode<ip>("VBoxContainer/ip")._Ready();
+		GetNode<ip>("VBoxContainer/ScrollContainer/PanelContainer/ip")._Ready();
 		var save=new ConfigFile();
 		save.Load("user://LocalChat.ini");
 		save.SetValue("Settings","Language",TranslationServer.GetLocale());
