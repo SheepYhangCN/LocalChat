@@ -132,14 +132,6 @@ offset_right = 1040.0
 offset_bottom = 580.0
 mouse_filter = 2
 
-[node name="Panel3" type="Panel" parent="IPs"]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 140.0
-offset_right = 1040.0
-offset_bottom = 580.0
-mouse_filter = 2
-
 [node name="Panel" type="Panel" parent="IPs"]
 layout_mode = 0
 offset_left = 240.0
@@ -186,14 +178,6 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Panel2" type="Panel" parent="List"]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 140.0
-offset_right = 1040.0
-offset_bottom = 580.0
-mouse_filter = 2
-
-[node name="Panel3" type="Panel" parent="List"]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 140.0
