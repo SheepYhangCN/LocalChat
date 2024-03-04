@@ -184,9 +184,8 @@ public partial class ChatRoom : Control
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void SendImage(int peer,string name,string time,Texture2D image)
+	internal async void SendImage(int peer,string name,string time,Texture2D image)
 	{
-		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		GD.Print("[Image]"+name+"("+peer.ToString()+")");
 		var ins=message_packed.Instantiate<Message>();
 		ins.id=message_id_next;
@@ -196,6 +195,28 @@ public partial class ChatRoom : Control
 		ins.time=time;
 		ins.image=image;
 		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
+		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
+		{
+			DisplayServer.WindowRequestAttention();
+			GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+			var datetime=Time.GetDatetimeStringFromSystem(false,true).Replace(" ","_").Replace(":","-")+new RandomNumberGenerator().Randi().ToString();
+			image.GetImage().SavePng("user://SavedImages/"+datetime+".png");
+			if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
+			{
+				new ToastContentBuilder()
+    				.AddArgument("action", "viewConversation")
+   					.AddArgument("conversationId", 9813)
+    				.AddText(name+" ("+peer.ToString()+")")
+					.AddInlineImage(new Uri(ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png")))
+    				.Show();
+			}
+			if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
+			{
+				OS.Execute("bash",["notify-send","-i",ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png"),name+" ("+peer.ToString()+")"]);
+			}
+			await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+			DirAccess.RemoveAbsolute("user://SavedImages"+datetime+".png");
+		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendSystemMessage(string message)
@@ -209,10 +230,12 @@ public partial class ChatRoom : Control
     			.AddText(message)
     			.Show();
 		}
-			if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
-			{
-				OS.Execute("bash",["notify-send",TranslationServer.Translate("locNewSystemMessage"),message]);
-			}
+		if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
+		{
+			OS.Execute("bash",["notify-send",TranslationServer.Translate("locNewSystemMessage"),message]);
+		}
+		DisplayServer.WindowRequestAttention();
+		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
 		/*ins.id=message_id_next;
