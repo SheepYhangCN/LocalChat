@@ -31,8 +31,8 @@ MIT License
 - [x] Text box go to top when open Input method in mobile
 - [ ] Add a Chat Room lobby, add public and private option
 - [x] Add desktop notification (windows)
-- [ ] Add desktop notification (linux)
-- [ ] Add notification (mobile)
+- [x] Add desktop notification (linux)
 - [x] Allow user to ping someone
 - [ ] Sending Image
+- [ ] ~~Add notification (android)~~ Since Godot can't make app runs in background in Android without coding in Java, i gave up
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead

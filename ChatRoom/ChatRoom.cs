@@ -168,6 +168,10 @@ public partial class ChatRoom : Control
     				.AddText(message)
     				.Show();
 			}
+			if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
+			{
+				OS.Execute("bash",["notify-send",name+" ("+peer.ToString()+")",message]);
+			}
 		}
 		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
@@ -205,6 +209,10 @@ public partial class ChatRoom : Control
     			.AddText(message)
     			.Show();
 		}
+			if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
+			{
+				OS.Execute("bash",["notify-send",TranslationServer.Translate("locNewSystemMessage"),message]);
+			}
 		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
 		/*ins.id=message_id_next;
