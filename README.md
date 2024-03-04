@@ -29,5 +29,8 @@ MIT License
 - [ ] Roll to bottom when received new message
 - [ ] Text box go to top when open Input method in mobile
 - [ ] Add scroll bar in Main Menu to avoid too much IP addresses
+- [ ] Add a Chat Room lobby, add public and private option
+- [ ] Add desktop notification
+- [ ] Allow user to ping someone
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
