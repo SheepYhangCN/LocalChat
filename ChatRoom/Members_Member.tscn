@@ -31,13 +31,13 @@ layout_mode = 2
 
 [node name="Ping" type="Button" parent="Actions"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "locPingMember"
 
 [node name="Remove" type="Button" parent="Actions"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 text = "locRemoveMember"
 
 [connection signal="pressed" from="Actions/Ping" to="." method="_on_ping_pressed"]
