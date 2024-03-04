@@ -123,12 +123,28 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("3_xkmtu")
 
+[node name="Panel2" type="Panel" parent="IPs"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 140.0
+offset_right = 1040.0
+offset_bottom = 580.0
+mouse_filter = 2
+
+[node name="Panel3" type="Panel" parent="IPs"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 140.0
+offset_right = 1040.0
+offset_bottom = 580.0
+mouse_filter = 2
+
 [node name="Panel" type="Panel" parent="IPs"]
 layout_mode = 0
-offset_left = 320.0
-offset_top = 180.0
-offset_right = 960.0
-offset_bottom = 540.0
+offset_left = 240.0
+offset_top = 140.0
+offset_right = 1040.0
+offset_bottom = 580.0
 mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="IPs/Panel"]
@@ -168,12 +184,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
+[node name="Panel2" type="Panel" parent="List"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 140.0
+offset_right = 1040.0
+offset_bottom = 580.0
+mouse_filter = 2
+
+[node name="Panel3" type="Panel" parent="List"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 140.0
+offset_right = 1040.0
+offset_bottom = 580.0
+mouse_filter = 2
+
 [node name="Panel" type="Panel" parent="List"]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 90.0
-offset_right = 1120.0
-offset_bottom = 630.0
+offset_left = 240.0
+offset_top = 140.0
+offset_right = 1040.0
+offset_bottom = 580.0
 mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="List/Panel"]
