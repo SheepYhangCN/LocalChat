@@ -34,3 +34,5 @@ locYouWasRemoved;You was removed from the\nChat Room by the Host;你被主机移
 locConnectionLost;Connection Lost;连接已丢失;連線已丟失;接続が失われました
 locSha256DoesntMatch;Sha256 doesn't match with Host\nMake sure you are using the\nsame version as Host;与主机的 Sha256 不匹配\n请确保你使用的是与主机相同的版本;與主機的 Sha256 不匹配\n請確保你是用的是與主機相同的版本;Sha256とホストの不一致\nホストと同じバージョンを\n使用していることを確認します
 locVersionDoesntMatch;Version doesn't match with Host\nMake sure you are using the\nsame version as Host;与主机的版本号不匹配\n请确保你使用的是与主机相同的版本;與主機的版本號不匹配\n請確保你是用的是與主機相同的版本;バージョン番号の不一致\nホストと同じバージョンを\n使用していることを確認してく
+locNewSystemMessage;There is a new system message;有一条新的系统消息;有一條新的系統訊息;新しいシステムメッセージがあります
+locYouWasPinged;You was pinged;你被呼叫了;你被呼叫了;あなたは呼び出された

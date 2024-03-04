@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 public partial class AutoLoad : Node
 {
@@ -15,5 +16,13 @@ public partial class AutoLoad : Node
 
 	public override void _Process(double delta)
 	{
+	}
+
+	public override void _Notification(int what)
+	{
+	    if (OS.GetName() == "Windows" && what == NotificationWMCloseRequest)
+		{
+			ToastNotificationManagerCompat.Uninstall();
+		}
 	}
 }

@@ -30,7 +30,9 @@ MIT License
 - [x] Add scroll bar in Main Menu to avoid too much IP addresses
 - [x] Text box go to top when open Input method in mobile
 - [ ] Add a Chat Room lobby, add public and private option
-- [ ] Add desktop notification
+- [x] Add desktop notification (windows)
+- [ ] Add desktop notification (linux)
+- [ ] Add notification (mobile)
 - [x] Allow user to ping someone
 - [ ] Sending Image
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead

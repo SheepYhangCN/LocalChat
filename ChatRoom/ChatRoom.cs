@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 public partial class ChatRoom : Control
 {
@@ -158,6 +159,15 @@ public partial class ChatRoom : Control
 		{
 			DisplayServer.WindowRequestAttention();
 			GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+			if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
+			{
+				new ToastContentBuilder()
+    				.AddArgument("action", "viewConversation")
+   					.AddArgument("conversationId", 9813)
+    				.AddText(name+" ("+peer.ToString()+")")
+    				.AddText(message)
+    				.Show();
+			}
 		}
 		GD.Print(name+"("+peer.ToString()+")"+": "+message);
 		var ins=message_packed.Instantiate<Message>();
@@ -186,6 +196,15 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendSystemMessage(string message)
 	{
+		if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
+		{
+			new ToastContentBuilder()
+    			.AddArgument("action", "viewConversation")
+   				.AddArgument("conversationId", 9813)
+    			.AddText(TranslationServer.Translate("locNewSystemMessage"))
+    			.AddText(message)
+    			.Show();
+		}
 		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
 		/*ins.id=message_id_next;
@@ -308,10 +327,22 @@ public partial class ChatRoom : Control
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void Pinged(int peer, string name)
+	internal async void Pinged(int peer, string name)
 	{
-		GetWindow().GrabFocus();
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
+		if (OS.GetName() == "Windows")
+		{
+			new ToastContentBuilder()
+    			.AddArgument("action", "viewConversation")
+   				.AddArgument("conversationId", 9813)
+    			.AddText(TranslationServer.Translate("locYouWasCalled"))
+    			.AddText(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name))
+    			.Show();
+			GetWindow().AlwaysOnTop=true;
+			GetWindow().GrabFocus();
+			await ToSignal(GetTree().CreateTimer(0.1), "timeout");
+			GetWindow().AlwaysOnTop=false;
+		}
 	}
 }
