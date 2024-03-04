@@ -15,7 +15,7 @@ public partial class ChatRoom : Control
 		Multiplayer.ServerDisconnected+=disconnected;
 		Multiplayer.MultiplayerPeer.PeerDisconnected+=client_disconnected;
 		Multiplayer.MultiplayerPeer.SetTargetPeer((int)MultiplayerPeer.TargetPeerBroadcast);
-		GetNode<Label>("VBoxContainer/Title/Panel/Label").Text=TranslationServer.Translate("locCurrentUsername")+GetNode<AutoLoad>("/root/AutoLoad").name+" ("+Multiplayer.GetUniqueId().ToString()+")";
+		GetNode<Label>("VBoxContainer/Title/Panel/Label").Text=TranslationServer.Translate("locCurrentUsername")+autoload.name+" ("+Multiplayer.GetUniqueId().ToString()+")";
 		if (Multiplayer.IsServer())
 		{
 			GetNode<Button>("VBoxContainer/Title/Quit").Text=TranslationServer.Translate("locCloseChatroom");
@@ -41,6 +41,21 @@ public partial class ChatRoom : Control
 
 	public override void _Process(double delta)
 	{
+		if (OS.HasFeature("mobile"))
+		{
+			if (DisplayServer.VirtualKeyboardGetHeight() == 0)
+			{
+				GetNode<HBoxContainer>("VBoxContainer/Title").Visible=true;
+				GetNode<Panel>("VBoxContainer/Panel").Visible=true;
+				GetNode<Button>("MemberList").Visible=true;
+			}
+			else
+			{
+				GetNode<HBoxContainer>("VBoxContainer/Title").Visible=false;
+				GetNode<Panel>("VBoxContainer/Panel").Visible=false;
+				GetNode<Button>("MemberList").Visible=false;
+			}
+		}
 	}
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
@@ -291,5 +306,12 @@ public partial class ChatRoom : Control
 		Multiplayer.MultiplayerPeer=null;
 		GetNode<AutoLoad>("/root/AutoLoad").popup=3;
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
+	}
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
+	internal void Pinged(int peer, string name)
+	{
+		GetWindow().GrabFocus();
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
 	}
 }

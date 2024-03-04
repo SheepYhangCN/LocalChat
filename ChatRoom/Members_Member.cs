@@ -27,4 +27,9 @@ public partial class Members_Member : HBoxContainer
 	{
 		GetNode<ChatRoom>("../../../../../").RpcId(peer,"Removed");
 	}
+
+	public void _on_ping_pressed()
+	{
+		GetNode<ChatRoom>("../../../../../").RpcId(peer,"Pinged",Multiplayer.MultiplayerPeer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name);
+	}
 }

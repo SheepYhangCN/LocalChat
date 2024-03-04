@@ -20,6 +20,7 @@ locJoined; joined Chat Room!; 加入了聊天室！; 加入了聊天室！; が�
 locQuitted; quitted Chat Room; 退出了聊天室; 退出了聊天室; が脱退しました
 locWasRemoved; was removed from this Chat Room; 被移出了聊天室; 被移出了聊天室; は除去されました
 locLostConnection; lost connection; 丢失了连接; 丟失了連線; 接続が失われました
+locPinged; was pinged by {BY}; 被 {BY} 呼叫了; 被 {BY} 呼叫了; は {BY} に呼び出された
 locEnter2Send;Enter to Send, Shift+Enter to wrap;Enter 来发送，Shift+Enter 来换行;Enter 來發送，Shift+Enter 來換行;Enterが送信し、Shift+Enterが改行する
 locSend; Send ; 发送 ; 發送 ; 送信 
 locAnywhere2Close;(Click anywhere to Close);（单击任意处关闭）;（點擊任意處關閉）;（任意の場所をクリックして閉じる）
@@ -28,6 +29,7 @@ locMemberList;Member\nList;成\n员\n列\n表;成\n員\n列\n表;メン\nバー\
 locCopy;Copy;复制;拷貝;コピー
 locDelete;Delete;刪除;删除;削除
 locRemoveMember;Remove;移出;移出;除去
+locPingMember;Ping;呼叫;呼叫;呼び出す
 locYouWasRemoved;You was removed from the\nChat Room by the Host;你被主机移出了聊天室;你被主機移出了聊天室;あなたは司会者にチャットルーム\nから除去されました
 locConnectionLost;Connection Lost;连接已丢失;連線已丟失;接続が失われました
 locSha256DoesntMatch;Sha256 doesn't match with Host\nMake sure you are using the\nsame version as Host;与主机的 Sha256 不匹配\n请确保你使用的是与主机相同的版本;與主機的 Sha256 不匹配\n請確保你是用的是與主機相同的版本;Sha256とホストの不一致\nホストと同じバージョンを\n使用していることを確認します
