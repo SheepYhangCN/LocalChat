@@ -29,10 +29,10 @@ MIT License
 - [ ] Roll to bottom when received new message
 - [x] Add scroll bar in Main Menu to avoid too much IP addresses
 - [x] Text box go to top when open Input method in mobile
-- [ ] Add a Chat Room lobby, add public and private option
 - [x] Add desktop notification (windows)
 - [x] Add desktop notification (linux)
 - [x] Allow user to ping someone
 - [ ] Sending Image
+- [ ] ~~Add a Chat Room lobby, add public and private option~~ Since this app works with UDP and p2p connection, i can't make it possible
 - [ ] ~~Add notification (android)~~ Since Godot can't make app runs in background in Android without coding in Java, i gave up
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
