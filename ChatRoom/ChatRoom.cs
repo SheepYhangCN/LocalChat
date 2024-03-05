@@ -153,9 +153,11 @@ public partial class ChatRoom : Control
 		Quitted(id);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void SendMessage(int peer,string name,string time,string message)
+	internal async void SendMessage(int peer,string name,string time,string message)
 	{
 		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
+		var scrollbar = scroll.GetVScrollBar();
+		var scrollb=(scrollbar.Value + scroll.Size.Y) >= scrollbar.MaxValue;
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
 			if(!GetWindow().HasFocus())
@@ -186,11 +188,19 @@ public partial class ChatRoom : Control
 		ins.time=time;
 		ins.message=message;
 		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
+		//GD.Print(scrollb.ToString()+" "+scrollbar.Value.ToString()+" "+scroll.ScrollVertical.ToString()+" "+(scrollbar.Value + scroll.Size.Y).ToString()+" "+scrollbar.MaxValue.ToString());
+		if (scrollb)
+		{
+			await ToSignal(GetTree().CreateTimer(0.02f),"timeout");
+			scroll.ScrollVertical=(int)Math.Ceiling(scrollbar.MaxValue);
+		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal async void SendImage(int peer,string name,string time,Texture2D image)
 	{
 		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
+		var scrollbar = scroll.GetVScrollBar();
+		var scrollb=(scrollbar.Value + scroll.Size.Y) >= scrollbar.MaxValue;
 		GD.Print("[Image]"+name+"("+peer.ToString()+")");
 		var ins=message_packed.Instantiate<Message>();
 		ins.id=message_id_next;
@@ -200,6 +210,11 @@ public partial class ChatRoom : Control
 		ins.time=time;
 		ins.image=image;
 		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
+		if (scrollb)
+		{
+			await ToSignal(GetTree().CreateTimer(0.02f),"timeout");
+			scroll.ScrollVertical=(int)Math.Ceiling(scrollbar.MaxValue);
+		}
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
 			if(!GetWindow().HasFocus())
@@ -227,9 +242,11 @@ public partial class ChatRoom : Control
 		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void SendSystemMessage(string message,bool notification = true)
+	internal async void SendSystemMessage(string message,bool notification = true)
 	{
 		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
+		var scrollbar = scroll.GetVScrollBar();
+		var scrollb=(scrollbar.Value + scroll.Size.Y) >= scrollbar.MaxValue;
 		if (notification && OS.GetName() == "Windows" && !GetWindow().HasFocus())
 		{
 			new ToastContentBuilder()
@@ -254,6 +271,11 @@ public partial class ChatRoom : Control
 		message_id_next+=1;*/
 		ins.GetNode<Label>("PanelContainer/Message").Text="["+Time.GetDatetimeStringFromSystem(false,true)+"]\n"+message;
 		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
+		if (scrollb)
+		{
+			await ToSignal(GetTree().CreateTimer(0.02f),"timeout");
+			scroll.ScrollVertical=(int)Math.Ceiling(scrollbar.MaxValue);
+		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void Joined(string name,int peer)

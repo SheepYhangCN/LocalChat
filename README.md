@@ -26,7 +26,7 @@ MIT License
 - [x] Add Sha256 Check
 - [x] Add Installer
 - [x] Taskbar alert when received new message
-- [ ] Roll to bottom when received new message
+- [x] Scroll to bottom when received new message
 - [x] Add scroll bar in Main Menu to avoid too much IP addresses
 - [x] Text box go to top when open Input method in mobile
 - [x] Add desktop notification (windows)
