@@ -155,18 +155,22 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendMessage(int peer,string name,string time,string message)
 	{
+		var scroll=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer");
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
-			DisplayServer.WindowRequestAttention();
+			if(!GetWindow().HasFocus())
+			{
+				DisplayServer.WindowRequestAttention();
+			}
 			GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 			if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
 			{
 				new ToastContentBuilder()
-    				.AddArgument("action", "viewConversation")
+					.AddArgument("action", "viewConversation")
    					.AddArgument("conversationId", 9813)
-    				.AddText(name+" ("+peer.ToString()+")")
-    				.AddText(message)
-    				.Show();
+					.AddText(name+" ("+peer.ToString()+")")
+					.AddText(message)
+					.Show();
 			}
 			if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
 			{
@@ -181,11 +185,13 @@ public partial class ChatRoom : Control
 		ins.name=name;
 		ins.time=time;
 		ins.message=message;
-		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
+		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
+		//scroll.ScrollVertical+=1145141919;
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal async void SendImage(int peer,string name,string time,Texture2D image)
 	{
+		var scroll=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer");
 		GD.Print("[Image]"+name+"("+peer.ToString()+")");
 		var ins=message_packed.Instantiate<Message>();
 		ins.id=message_id_next;
@@ -194,21 +200,25 @@ public partial class ChatRoom : Control
 		ins.name=name;
 		ins.time=time;
 		ins.image=image;
-		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
+		scroll.AddChild(ins);
+		//scroll.ScrollVertical+=1145141919;
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
-			DisplayServer.WindowRequestAttention();
+			if(!GetWindow().HasFocus())
+			{
+				DisplayServer.WindowRequestAttention();
+			}
 			GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 			var datetime=Time.GetDatetimeStringFromSystem(false,true).Replace(" ","_").Replace(":","-")+new RandomNumberGenerator().Randi().ToString();
 			image.GetImage().SavePng("user://SavedImages/"+datetime+".png");
 			if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
 			{
 				new ToastContentBuilder()
-    				.AddArgument("action", "viewConversation")
+					.AddArgument("action", "viewConversation")
    					.AddArgument("conversationId", 9813)
-    				.AddText(name+" ("+peer.ToString()+")")
+					.AddText(name+" ("+peer.ToString()+")")
 					.AddInlineImage(new Uri(ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png")))
-    				.Show();
+					.Show();
 			}
 			if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
 			{
@@ -219,29 +229,34 @@ public partial class ChatRoom : Control
 		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void SendSystemMessage(string message)
+	internal void SendSystemMessage(string message,bool notification = true)
 	{
-		if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
+		var scroll=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer");
+		if (notification && OS.GetName() == "Windows" && !GetWindow().HasFocus())
 		{
 			new ToastContentBuilder()
-    			.AddArgument("action", "viewConversation")
+				.AddArgument("action", "viewConversation")
    				.AddArgument("conversationId", 9813)
-    			.AddText(TranslationServer.Translate("locNewSystemMessage"))
-    			.AddText(message)
-    			.Show();
+				.AddText(TranslationServer.Translate("locNewSystemMessage"))
+				.AddText(message)
+				.Show();
 		}
 		if (OS.GetName() == "Linux" && !GetWindow().HasFocus())
 		{
 			OS.Execute("bash",["notify-send",TranslationServer.Translate("locNewSystemMessage"),message]);
 		}
-		DisplayServer.WindowRequestAttention();
+		if(!GetWindow().HasFocus())
+		{
+			DisplayServer.WindowRequestAttention();
+		}
 		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
 		/*ins.id=message_id_next;
 		message_id_next+=1;*/
 		ins.GetNode<Label>("PanelContainer/Message").Text="["+Time.GetDatetimeStringFromSystem(false,true)+"]\n"+message;
-		GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer").AddChild(ins);
+		scroll.AddChild(ins);
+		//scroll.ScrollVertical+=1145141919;
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void Joined(string name,int peer)
@@ -358,22 +373,23 @@ public partial class ChatRoom : Control
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal async void Pinged(int peer, string name)
+	internal void Pinged(int peer, string name)
 	{
-		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name),false);
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
 		if (OS.GetName() == "Windows")
 		{
 			new ToastContentBuilder()
-    			.AddArgument("action", "viewConversation")
+				.AddArgument("action", "viewConversation")
    				.AddArgument("conversationId", 9813)
-    			.AddText(TranslationServer.Translate("locYouWasCalled"))
-    			.AddText(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name))
-    			.Show();
-			GetWindow().AlwaysOnTop=true;
+				.AddText(TranslationServer.Translate("locYouWasPinged"))
+				.AddText(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name))
+				.Show();
+			if (DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Minimized)
+			{
+				DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+			}
 			GetWindow().GrabFocus();
-			await ToSignal(GetTree().CreateTimer(0.1), "timeout");
-			GetWindow().AlwaysOnTop=false;
 		}
 	}
 }
