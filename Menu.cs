@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 public partial class Menu : Control
 {
@@ -43,6 +44,15 @@ public partial class Menu : Control
 			else if (autoload.popup == 3)
 			{
 				GetNode<Label>("Popup/PanelContainer/Label").Text="locVersionDoesntMatch";
+			}
+			if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
+			{
+				new ToastContentBuilder()
+					.AddArgument("action", "viewConversation")
+   					.AddArgument("conversationId", 9813)
+					.AddText(TranslationServer.Translate(autoload.popup == 1 ? "locBackedToMenu" : "locConnectFailed"))
+					.AddText(TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text))
+					.Show();
 			}
 			autoload.popup=0;
 			autoload.is_connection_lost=false;

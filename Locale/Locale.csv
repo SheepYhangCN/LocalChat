@@ -36,3 +36,5 @@ locSha256DoesntMatch;Sha256 doesn't match with Host\nMake sure you are using the
 locVersionDoesntMatch;Version doesn't match with Host\nMake sure you are using the\nsame version as Host;与主机的版本号不匹配\n请确保你使用的是与主机相同的版本;與主機的版本號不匹配\n請確保你是用的是與主機相同的版本;バージョン番号の不一致\nホストと同じバージョンを\n使用していることを確認してく
 locNewSystemMessage;There is a new system message;有一条新的系统消息;有一條新的系統訊息;新しいシステムメッセージがあります
 locYouWasPinged;You was pinged;你被呼叫了;你被呼叫了;あなたは呼び出された
+locBackedToMenu;Backed to Menu;回到菜单;回到選單;メニューに戻る
+locConnectFailed;Connect Failed;连接失败;連線失敗;接続に失敗しました
