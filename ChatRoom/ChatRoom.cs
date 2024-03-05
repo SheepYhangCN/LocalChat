@@ -155,7 +155,7 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendMessage(int peer,string name,string time,string message)
 	{
-		var scroll=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer");
+		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
 			if(!GetWindow().HasFocus())
@@ -186,12 +186,11 @@ public partial class ChatRoom : Control
 		ins.time=time;
 		ins.message=message;
 		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
-		//scroll.ScrollVertical+=1145141919;
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal async void SendImage(int peer,string name,string time,Texture2D image)
 	{
-		var scroll=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer");
+		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
 		GD.Print("[Image]"+name+"("+peer.ToString()+")");
 		var ins=message_packed.Instantiate<Message>();
 		ins.id=message_id_next;
@@ -200,8 +199,7 @@ public partial class ChatRoom : Control
 		ins.name=name;
 		ins.time=time;
 		ins.image=image;
-		scroll.AddChild(ins);
-		//scroll.ScrollVertical+=1145141919;
+		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
 		{
 			if(!GetWindow().HasFocus())
@@ -231,7 +229,7 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void SendSystemMessage(string message,bool notification = true)
 	{
-		var scroll=GetNode<VBoxContainer>("VBoxContainer/Panel/ScrollContainer/VBoxContainer");
+		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
 		if (notification && OS.GetName() == "Windows" && !GetWindow().HasFocus())
 		{
 			new ToastContentBuilder()
@@ -255,8 +253,7 @@ public partial class ChatRoom : Control
 		/*ins.id=message_id_next;
 		message_id_next+=1;*/
 		ins.GetNode<Label>("PanelContainer/Message").Text="["+Time.GetDatetimeStringFromSystem(false,true)+"]\n"+message;
-		scroll.AddChild(ins);
-		//scroll.ScrollVertical+=1145141919;
+		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void Joined(string name,int peer)
