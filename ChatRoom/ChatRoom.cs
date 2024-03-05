@@ -247,7 +247,7 @@ public partial class ChatRoom : Control
 		{
 			DisplayServer.WindowRequestAttention();
 		}
-		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
+		//GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 		//GetNode<List>("List").Update();
 		var ins=sys_message_packed.Instantiate<HBoxContainer>();
 		/*ins.id=message_id_next;
