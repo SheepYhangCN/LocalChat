@@ -36,8 +36,8 @@ public partial class ChatRoom : Control
 				RpcId(MultiplayerPeer.TargetPeerServer,"VersionCheck",Multiplayer.MultiplayerPeer.GetUniqueId(),autoload.version);
 			}
 		}
-		SendSystemMessage(autoload.name+TranslationServer.Translate("locJoined"));
-		Rpc("SendSystemMessage",autoload.name+TranslationServer.Translate("locJoined"));
+		SendSystemMessage(autoload.name+TranslationServer.Translate("locJoined"),true);
+		Rpc("SendSystemMessage",autoload.name+TranslationServer.Translate("locJoined"),true);
 	}
 
 	public override void _Process(double delta)
@@ -149,7 +149,7 @@ public partial class ChatRoom : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void ClientDisconnected(int id,string name,int normal)
 	{
-		SendSystemMessage(name+TranslationServer.Translate(normal==1 ? "locQuitted" : "locLostConnection"));
+		SendSystemMessage(name+TranslationServer.Translate(normal==1 ? "locQuitted" : "locLostConnection"),true);
 		Quitted(id);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
@@ -242,7 +242,7 @@ public partial class ChatRoom : Control
 		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal async void SendSystemMessage(string message,bool notification = true)
+	internal async void SendSystemMessage(string message,bool notification)
 	{
 		var scroll=GetNode<ScrollContainer>("VBoxContainer/Panel/ScrollContainer");
 		var scrollbar = scroll.GetVScrollBar();
@@ -317,8 +317,8 @@ public partial class ChatRoom : Control
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
 		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
-		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
@@ -361,8 +361,8 @@ public partial class ChatRoom : Control
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
 		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
-		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
@@ -383,8 +383,8 @@ public partial class ChatRoom : Control
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
 		Rpc("Quitted",Multiplayer.MultiplayerPeer.GetUniqueId());
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
-		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"));
+		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
 		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
@@ -395,7 +395,7 @@ public partial class ChatRoom : Control
 	internal void Pinged(int peer, string name)
 	{
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name),false);
-		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name));
+		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name),true);
 		if (OS.GetName() == "Windows")
 		{
 			new ToastContentBuilder()
