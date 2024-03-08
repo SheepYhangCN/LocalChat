@@ -10,6 +10,7 @@ public partial class AutoLoad : Node
 	internal int popup=0;
 	internal bool is_connection_lost=false;
 	internal string version="v2024.3.7";
+	internal bool notification=true;
 	public override void _Ready()
 	{
 	}
@@ -22,6 +23,7 @@ public partial class AutoLoad : Node
 	{
 	    if (OS.GetName() == "Windows" && what == NotificationWMCloseRequest)
 		{
+			ToastNotificationManagerCompat.History.Clear();
 			ToastNotificationManagerCompat.Uninstall();
 		}
 	}

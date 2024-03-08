@@ -18,6 +18,7 @@ public partial class Init : Node2D
 			var save=new ConfigFile();
 			save.Load("user://LocalChat.ini");
 			TranslationServer.SetLocale((string)save.GetValue("Settings","Language","en"));
+			GetNode<AutoLoad>("/root/AutoLoad").notification=(bool)save.GetValue("Settings","Notification",true);
 		}
 		else
 		{

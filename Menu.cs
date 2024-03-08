@@ -6,8 +6,8 @@ public partial class Menu : Control
 {
 	public override void _Ready()
 	{
-		var node=GetNode<OptionButton>("OptionButton");
 		var autoload=GetNode<AutoLoad>("/root/AutoLoad");
+		var node=GetNode<OptionButton>("OptionButton");
 		switch (TranslationServer.GetLocale())
 		{
 			case "en":
@@ -23,6 +23,7 @@ public partial class Menu : Control
 				node.Selected=3;
 				break;
 		}
+		GetNode<CheckButton>("HBoxContainer/Control2/CheckButton").ButtonPressed=autoload.notification;
 		GetNode<Label>("Version").Text=autoload.version;
 		if (autoload.popup >= 1)
 		{
@@ -45,14 +46,23 @@ public partial class Menu : Control
 			{
 				GetNode<Label>("Popup/PanelContainer/Label").Text="locVersionDoesntMatch";
 			}
-			if (OS.GetName() == "Windows" && !GetWindow().HasFocus())
+			if (autoload.notification && !GetWindow().HasFocus())
 			{
-				new ToastContentBuilder()
-					.AddArgument("action", "viewConversation")
-   					.AddArgument("conversationId", 9813)
-					.AddText(TranslationServer.Translate(autoload.popup == 1 ? "locBackedToMenu" : "locConnectFailed"))
-					.AddText(TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text))
-					.Show();
+				if (OS.GetName() == "Windows")
+				{
+					var timed=Time.GetDatetimeDictFromSystem(false);
+					new ToastContentBuilder()
+						.AddArgument("action", "viewConversation")
+   						.AddArgument("conversationId", 9813)
+						.AddText(TranslationServer.Translate(autoload.popup == 1 ? "locBackedToMenu" : "locConnectFailed"))
+						.AddText(TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text))
+						.AddCustomTimeStamp(new DateTime((int)timed[0],(int)timed[1],(int)timed[2],(int)timed[4],(int)timed[5],(int)timed[6],DateTimeKind.Local))
+						.Show();
+				}
+				if (OS.GetName() == "Linux")
+				{
+					OS.Execute("bash",["notify-send",TranslationServer.Translate(autoload.popup == 1 ? "locBackedToMenu" : "locConnectFailed"),TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text)]);
+				}
 			}
 			autoload.popup=0;
 			autoload.is_connection_lost=false;
@@ -126,6 +136,15 @@ public partial class Menu : Control
 		save.SetValue("Settings","Language",TranslationServer.GetLocale());
 		save.Save("user://LocalChat.ini");
 		ContainerUpdate(GetNode<VBoxContainer>("VBoxContainer"));
+	}
+
+	public void _on_check_button_toggled(bool a)
+	{
+		GetNode<AutoLoad>("/root/AutoLoad").notification=a;
+		var save=new ConfigFile();
+		save.Load("user://LocalChat.ini");
+		save.SetValue("Settings","Notification",a);
+		save.Save("user://LocalChat.ini");
 	}
 
 	public void _on_ok_pressed()
