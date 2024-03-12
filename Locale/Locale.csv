@@ -10,7 +10,7 @@ locConnect;Connect;连接;連線;せつぞく
 locIP;IP Address;IP 地址;IP 位址;IPアドレス
 locPort;Port ;端口 ;埠口 ;ポート
 locPortColon;Port: ;端口：;埠口：;ポート：
-locPortHere;Room Port here;在此输入房间端口号;在此輸入房間埠口號碼;
+locPortHere;Room Port here;在此输入房间端口号;在此輸入房間埠口號碼;ルームポート
 locUDPOnly;(Use UDP only, no TCP usage);（仅使用UDP，不使用TCP）;（僅使用UDP，不使用TCP）;（UDPのみ使用、TCPは使用しない）
 locQuitChatroom;Quit ChatRoom;退出聊天室;退出聊天室;から去る
 locCloseChatroom;Close ChatRoom;关闭聊天室;關閉聊天室;閉じる
