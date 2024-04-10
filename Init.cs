@@ -5,13 +5,17 @@ public partial class Init : Node2D
 {
 	public override void _Ready()
 	{
-		if (OS.GetLocaleLanguage() == "zh" || OS.GetLocale() == "zh_CN" || OS.GetLocale() == "zh_SG")
-		{
-			TranslationServer.SetLocale("zh_CN");
-		}
 		if (OS.GetLocale() == "zh_TW" || OS.GetLocale() == "zh_HK" || OS.GetLocale() == "zh_MO")
 		{
-			TranslationServer.SetLocale("zh_TW");
+		    TranslationServer.SetLocale("zh_TW");
+		}
+		else if (OS.GetLocaleLanguage() == "zh" || OS.GetLocale() == "zh_CN" || OS.GetLocale() == "zh_SG")
+		{
+		    TranslationServer.SetLocale("zh_CN");
+		}
+		else
+		{
+		    TranslationServer.SetLocale(OS.GetLocale());
 		}
 		if (FileAccess.FileExists("user://LocalChat.ini"))
 		{
