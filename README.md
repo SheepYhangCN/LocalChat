@@ -6,8 +6,8 @@ I made this because i want to chat with my classmates in information technology 
 My teachers are really fond of unplugging the network cable between switcher and the router.
 
 ## Environment Dependence
-Godot 4.2.1 Stable Mono Official<br>
-.NET 8.0.100 (well actually, .net8 is not necessary, if you want to use other version of .net, just change the `TargetFramework` in `LocalChat.csproj`)<br>
+Godot 4.2.2 Stable Mono Official<br>
+.NET 8.0.100 (need for desktop notification in windows)
 Inno Setup (If you want to compile ```.exe``` installer)
 
 ## Open-source License
