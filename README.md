@@ -7,7 +7,7 @@ My teachers are really fond of unplugging the network cable between switcher and
 
 ## Environment Dependence
 Godot 4.2.2 Stable Mono Official<br>
-.NET 8.0.100 (need for desktop notification in windows)
+.NET 8.0.100<br>
 Inno Setup (If you want to compile ```.exe``` installer)
 
 ## Open-source License
