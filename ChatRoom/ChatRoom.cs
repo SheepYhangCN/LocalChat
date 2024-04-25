@@ -29,7 +29,7 @@ public partial class ChatRoom : Control
 			//if (OS.GetName()=="Windows" || OS.GetName()=="macOS" || OS.GetName()=="Linux")
 			if (OS.HasFeature("pc"))
 			{
-				RpcId(MultiplayerPeer.TargetPeerServer,"Sha256Check",Multiplayer.MultiplayerPeer.GetUniqueId(),FileAccess.GetSha256(OS.GetExecutablePath()),OS.GetName(),OS.HasFeature("64"),OS.HasFeature("32"),OS.HasFeature("x86"),OS.HasFeature("arm"),OS.HasFeature("riscv"),OS.HasFeature("ppc"),OS.HasFeature("wasm"));
+				RpcId(MultiplayerPeer.TargetPeerServer,"Sha256Check",Multiplayer.MultiplayerPeer.GetUniqueId(),autoload.version,FileAccess.GetSha256(OS.GetExecutablePath()),OS.GetName(),OS.HasFeature("64"),OS.HasFeature("32"),OS.HasFeature("x86"),OS.HasFeature("arm"),OS.HasFeature("riscv"),OS.HasFeature("ppc"),OS.HasFeature("wasm"));
 			}
 			else
 			{
@@ -73,7 +73,8 @@ public partial class ChatRoom : Control
 		}
 		else
 		{
-			Rpc("Quitted",Multiplayer.GetUniqueId());
+			Rpc("ClientDisconnected",Multiplayer.GetUniqueId(),GetNode<AutoLoad>("/root/AutoLoad").name,1);
+			//Rpc("Quitted",Multiplayer.GetUniqueId());
 			Rpc("SetMemberList",member_list);
 		}
 		await ToSignal(GetTree().CreateTimer(Multiplayer.IsServer() ? 0.5 : 0.25), "timeout");
@@ -141,10 +142,10 @@ public partial class ChatRoom : Control
 			if (children[a] is Members_Member && (int)children[a].Get("peer")==(int)id)
 			{
 				normal=0;
+				Rpc("ClientDisconnected",(int)id,member_list[(int)id],normal);
+				ClientDisconnected((int)id,member_list[(int)id],normal);
 			}
 		}
-		Rpc("ClientDisconnected",(int)id,member_list[(int)id],normal);
-		ClientDisconnected((int)id,member_list[(int)id],normal);
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	internal void ClientDisconnected(int id,string name,int normal)
@@ -176,7 +177,7 @@ public partial class ChatRoom : Control
 						.AddText(name+" ("+peer.ToString()+")")
 						.AddText(time)
 						.AddText(message)
-						.AddCustomTimeStamp(new DateTime((int)timed[0],(int)timed[1],(int)timed[2],(int)timed[4],(int)timed[5],(int)timed[6],DateTimeKind.Local))
+						.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 						.Show();
 				}
 				if (OS.GetName() == "Linux")
@@ -241,7 +242,7 @@ public partial class ChatRoom : Control
 						.AddText(name+" ("+peer.ToString()+")")
 						.AddText(time)
 						.AddInlineImage(new Uri(ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png")))
-						.AddCustomTimeStamp(new DateTime((int)timed[0],(int)timed[1],(int)timed[2],(int)timed[4],(int)timed[5],(int)timed[6],DateTimeKind.Local))
+						.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 						.Show();
 				}
 				if (OS.GetName() == "Linux")
@@ -271,7 +272,7 @@ public partial class ChatRoom : Control
 					.AddText(TranslationServer.Translate("locNewSystemMessage"))
 					.AddText(time)
 					.AddText(message)
-					.AddCustomTimeStamp(new DateTime((int)timed[0],(int)timed[1],(int)timed[2],(int)timed[4],(int)timed[5],(int)timed[6],DateTimeKind.Local))
+					.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 					.Show();
 			}
 			if (OS.GetName() == "Linux")
@@ -367,11 +368,18 @@ public partial class ChatRoom : Control
 		member_list=member_lista;
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
-	internal void Sha256Check(int peer,string sha256,string os,bool x64,bool x32,bool x86,bool arm,bool riscv,bool ppc,bool wasm)
+	internal void Sha256Check(int peer,string version,string sha256,string os,bool x64,bool x32,bool x86,bool arm,bool riscv,bool ppc,bool wasm)
 	{
-		if (os == OS.GetName() && OS.HasFeature("64") == x64 && OS.HasFeature("32") == x32 && OS.HasFeature("x86") == x86 && OS.HasFeature("arm") == arm && OS.HasFeature("riscv") == riscv && OS.HasFeature("ppc") == ppc && OS.HasFeature("wasm") == wasm && sha256 != FileAccess.GetSha256(OS.GetExecutablePath()))
+		if (os == OS.GetName() && OS.HasFeature("64") == x64 && OS.HasFeature("32") == x32 && OS.HasFeature("x86") == x86 && OS.HasFeature("arm") == arm && OS.HasFeature("riscv") == riscv && OS.HasFeature("ppc") == ppc && OS.HasFeature("wasm") == wasm)
 		{
-			RpcId(peer,"Sha256DoesntMatch");
+			if (sha256 != FileAccess.GetSha256(OS.GetExecutablePath()))
+			{
+				RpcId(peer,"Sha256DoesntMatch");
+			}
+		}
+		else
+		{
+			VersionCheck(peer,version);
 		}
 	}
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
@@ -428,7 +436,7 @@ public partial class ChatRoom : Control
 					.AddText(TranslationServer.Translate("locYouWasPinged"))
 					.AddText(time)
 					.AddText(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name))
-					.AddCustomTimeStamp(new DateTime((int)timed[0],(int)timed[1],(int)timed[2],(int)timed[4],(int)timed[5],(int)timed[6],DateTimeKind.Local))
+					.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 					.Show();
 			}
 			if (OS.GetName() == "Linux")

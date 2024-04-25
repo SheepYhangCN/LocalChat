@@ -56,7 +56,7 @@ public partial class Menu : Control
    						.AddArgument("conversationId", 9813)
 						.AddText(TranslationServer.Translate(autoload.popup == 1 ? "locBackedToMenu" : "locConnectFailed"))
 						.AddText(TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text))
-						.AddCustomTimeStamp(new DateTime((int)timed[0],(int)timed[1],(int)timed[2],(int)timed[4],(int)timed[5],(int)timed[6],DateTimeKind.Local))
+						.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 						.Show();
 				}
 				if (OS.GetName() == "Linux")
