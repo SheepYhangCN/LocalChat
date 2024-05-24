@@ -9,7 +9,7 @@ public partial class AutoLoad : Node
 	internal int port=1145;
 	internal int popup=0;
 	internal bool is_connection_lost=false;
-	internal string version="v2024.4.25";
+	internal string version="v"+ProjectSettings.GetSetting("application/config/version");
 	internal bool notification=true;
 	public override void _Ready()
 	{
