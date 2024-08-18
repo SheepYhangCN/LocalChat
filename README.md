@@ -32,6 +32,9 @@ MIT License
 - [x] Add desktop notification (windows)
 - [x] Add desktop notification (linux)
 - [x] Allow user to ping someone
+- [ ] Change time to UNIX timestamp to allow different time zone users to see the correct local time
+- [ ] Add a IP region shown
+- [ ] Show IP address in member list
 - [ ] Sending Image
 - [ ] ~~Add a Chat Room lobby, add public and private option~~ Since this app works with UDP and p2p connection, i can't make it possible
 - [ ] ~~Add notification (android)~~ Since Godot can't make app runs in background in Android without coding in Java, i gave up
