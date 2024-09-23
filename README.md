@@ -5,13 +5,17 @@ Made with Godot 4 Mono<br><br>
 I made this because i want to chat with my classmates in information technology class across the classroom without public network enabled.<br>
 My teachers are really fond of unplugging the network cable between switcher and the router.
 
-## Environment Dependence
-Godot 4.2.2 Stable Mono Official<br>
-.NET 8.0.100<br>
-Inno Setup (If you want to compile ```.exe``` installer)
-
 ## Open-source License
 MIT License
+
+## Used Things
+Godot Engine 4.3 - Juan Linietsky, Ariel Manzur and contributors<br>
+.NET 8 SDK - Microsoft<br>
+Visual Studio Code - Microsoft<br>
+Inno Setup - Jordan Russell and Martijn Laan<br>
+Message sound - [Mixkit](https://mixkit.co)<br>
+GDTask.Nuget - DE-YU<br>
+Microsoft.Toolkit.Uwp.Notifications - Microsoft
 
 ## To-do List
 - [x] Enter to Send

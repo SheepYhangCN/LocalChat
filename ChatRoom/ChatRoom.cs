@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using GodotTask;
 using Microsoft.Toolkit.Uwp.Notifications;
 
 public partial class ChatRoom : Control
@@ -77,7 +78,7 @@ public partial class ChatRoom : Control
 			//Rpc("Quitted",Multiplayer.GetUniqueId());
 			Rpc("SetMemberList",member_list);
 		}
-		await ToSignal(GetTree().CreateTimer(Multiplayer.IsServer() ? 0.5 : 0.25), "timeout");
+		await GDTask.Delay(Multiplayer.IsServer() ? 500 : 250);
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
@@ -126,7 +127,7 @@ public partial class ChatRoom : Control
 	private async void disconnected()
 	{
 		GetNode<Button>("VBoxContainer/Title/Quit").Disabled=true;
-		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+		await GDTask.Delay(250);
 		GetNode<AutoLoad>("/root/AutoLoad").popup=1;
 		GetNode<AutoLoad>("/root/AutoLoad").is_connection_lost=true;
 		Multiplayer.MultiplayerPeer.Close();
@@ -198,7 +199,7 @@ public partial class ChatRoom : Control
 		//GD.Print(scrollb.ToString()+" "+scrollbar.Value.ToString()+" "+scroll.ScrollVertical.ToString()+" "+(scrollbar.Value + scroll.Size.Y).ToString()+" "+scrollbar.MaxValue.ToString());
 		if (scrollb)
 		{
-			await ToSignal(GetTree().CreateTimer(0.02f),"timeout");
+			await GDTask.Delay(20);
 			scroll.ScrollVertical=(int)Math.Ceiling(scrollbar.MaxValue);
 		}
 	}
@@ -220,7 +221,7 @@ public partial class ChatRoom : Control
 		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
 		if (scrollb)
 		{
-			await ToSignal(GetTree().CreateTimer(0.02f),"timeout");
+			await GDTask.Delay(20);
 			scroll.ScrollVertical=(int)Math.Ceiling(scrollbar.MaxValue);
 		}
 		if (peer != Multiplayer.MultiplayerPeer.GetUniqueId())
@@ -250,7 +251,7 @@ public partial class ChatRoom : Control
 					OS.Execute("bash",["notify-send","-i",ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png"),name+" ("+peer.ToString()+")"]);
 				}
 			}
-			await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+			await GDTask.Delay(200);
 			DirAccess.RemoveAbsolute("user://SavedImages"+datetime+".png");
 		}
 	}
@@ -293,7 +294,7 @@ public partial class ChatRoom : Control
 		scroll.GetNode<VBoxContainer>("VBoxContainer").AddChild(ins);
 		if (scrollb)
 		{
-			await ToSignal(GetTree().CreateTimer(0.02f),"timeout");
+			await GDTask.Delay(20);
 			scroll.ScrollVertical=(int)Math.Ceiling(scrollbar.MaxValue);
 		}
 	}
@@ -339,7 +340,7 @@ public partial class ChatRoom : Control
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
-		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+		await GDTask.Delay(250);
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
 		GetNode<AutoLoad>("/root/AutoLoad").popup=1;
@@ -390,7 +391,7 @@ public partial class ChatRoom : Control
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
-		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+		await GDTask.Delay(250);
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
 		GetNode<AutoLoad>("/root/AutoLoad").popup=2;
@@ -412,7 +413,7 @@ public partial class ChatRoom : Control
 		Quitted(Multiplayer.MultiplayerPeer.GetUniqueId());
 		SendSystemMessage(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
 		Rpc("SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locWasRemoved"),true);
-		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+		await GDTask.Delay(250);
 		Multiplayer.MultiplayerPeer.Close();
 		Multiplayer.MultiplayerPeer=null;
 		GetNode<AutoLoad>("/root/AutoLoad").popup=3;

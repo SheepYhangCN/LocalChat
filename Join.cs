@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using GodotTask;
 
 public partial class Join : Control
 {
@@ -53,7 +54,7 @@ public partial class Join : Control
 
 	private async void connected()
 	{
-		await ToSignal(GetTree().CreateTimer(1f),"timeout");
+		await GDTask.Delay(1000);
 		GetTree().ChangeSceneToFile("res://ChatRoom/ChatRoom.tscn");
 	}
 }
