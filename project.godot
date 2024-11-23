@@ -16,7 +16,7 @@ run/main_scene="res://Init.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="LocalChat"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 

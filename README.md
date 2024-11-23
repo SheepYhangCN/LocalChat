@@ -13,9 +13,11 @@ Godot Engine 4.3 - Juan Linietsky, Ariel Manzur and contributors<br>
 .NET 8 SDK - Microsoft<br>
 Visual Studio Code - Microsoft<br>
 Inno Setup - Jordan Russell and Martijn Laan<br>
+GNU Unifont - Roman Czyborra & contributors<br>
 Message sound - [Mixkit](https://mixkit.co)<br>
 GDTask.Nuget - DE-YU<br>
 Microsoft.Toolkit.Uwp.Notifications - Microsoft
+AppIcon Forge - ZHANGYU
 
 ## To-do List
 - [x] Enter to Send
@@ -37,10 +39,10 @@ Microsoft.Toolkit.Uwp.Notifications - Microsoft
 - [x] Add desktop notification (linux)
 - [x] Allow user to ping someone
 - [ ] Change time to UNIX timestamp to allow different time zone users to see the correct local time
-- [ ] Add a IP region shown
-- [ ] Show IP address in member list
 - [ ] Improve Emoji shown (Noto Color Emoji)
 - [ ] Sending Image
+- [ ] ~~Add a IP region shown~~ not available for UDP
+- [ ] ~~Show IP address in member list~~ not available for UDP
 - [ ] ~~Add a Chat Room lobby, add public and private option~~ Since this app works with UDP and p2p connection, i can't make it possible
 - [ ] ~~Add notification (android)~~ Since Godot can't make app runs in background in Android without coding in Java, i gave up
 - [ ] ~~Sending Files~~ Use [LocalSend](https://localsend.org) instead
