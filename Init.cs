@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using GodotTask;
 
 public partial class Init : Node2D
 {
@@ -30,6 +31,7 @@ public partial class Init : Node2D
 			save.SetValue("Settings","Language",TranslationServer.GetLocale());
 			save.Save("user://LocalChat.ini");
 		}
+		GDTask.Delay(200);//todo fix
 		GetTree().ChangeSceneToFile("res://Menu.tscn");
 	}
 
