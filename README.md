@@ -1,4 +1,6 @@
 # LocalChat
+<img src="icon_padding.png" width="25%">
+
 An application that allows you to chat with others in LAN.<br>
 Also a Godot network system practice<br>
 Made with Godot 4 Mono<br><br>
