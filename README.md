@@ -16,7 +16,7 @@ Inno Setup - Jordan Russell and Martijn Laan<br>
 GNU Unifont - Roman Czyborra & contributors<br>
 Message sound - [Mixkit](https://mixkit.co)<br>
 GDTask.Nuget - DE-YU<br>
-Microsoft.Toolkit.Uwp.Notifications - Microsoft
+Microsoft.Toolkit.Uwp.Notifications - Microsoft<br>
 AppIcon Forge - ZHANGYU
 
 ## To-do List
