@@ -7,6 +7,10 @@ Made with Godot 4 Mono<br><br>
 I made this because i want to chat with my classmates in information technology class across the classroom without public network enabled.<br>
 My teachers are really fond of unplugging the network cable between switcher and the router.
 
+## Screenshots
+![Menu](./ScreenshotMenu.png)
+![InChatRoom](./ScreenshotChatting.png)
+
 ## Open-source License
 MIT License
 
