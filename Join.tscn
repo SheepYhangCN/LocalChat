@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b26vy5cuklbm"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_cfnd5"]
-[ext_resource type="Script" path="res://Join.cs" id="2_7n6cq"]
+[ext_resource type="Script" uid="uid://dse5jb34gtujj" path="res://Join.cs" id="2_7n6cq"]
 
 [node name="Join" type="Control"]
 layout_mode = 3

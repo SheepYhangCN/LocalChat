@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://co63rxuqs35bf"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_yply6"]
-[ext_resource type="Script" path="res://Create.cs" id="2_03bib"]
+[ext_resource type="Script" uid="uid://bagvwox4kjw0t" path="res://Create.cs" id="2_03bib"]
 
 [node name="Create" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwoyurg0qhvpl"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_0q8in"]
-[ext_resource type="Script" path="res://ChatRoom/Members_Member.cs" id="2_mtakw"]
+[ext_resource type="Script" uid="uid://k4kwkw0f3hvs" path="res://ChatRoom/Members_Member.cs" id="2_mtakw"]
 
 [node name="Member" type="HBoxContainer"]
 anchors_preset = 10

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c4uan2ws0t731"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_8lss0"]
-[ext_resource type="Script" path="res://ChatRoom/ChatRoom.cs" id="2_nhktq"]
-[ext_resource type="Script" path="res://ChatRoom/Text.cs" id="3_v3ekq"]
-[ext_resource type="Script" path="res://ChatRoom/IPs.cs" id="3_xkmtu"]
+[ext_resource type="Script" uid="uid://bmjd5sj73btub" path="res://ChatRoom/ChatRoom.cs" id="2_nhktq"]
+[ext_resource type="Script" uid="uid://f2rjq0ainuea" path="res://ChatRoom/Text.cs" id="3_v3ekq"]
+[ext_resource type="Script" uid="uid://p1wk4t8vaexl" path="res://ChatRoom/IPs.cs" id="3_xkmtu"]
 [ext_resource type="AudioStream" uid="uid://be35bebo2vva7" path="res://notification.wav" id="6_3v3ha"]
 
 [node name="ChatRoom" type="Control"]

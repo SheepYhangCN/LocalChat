@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://butexi7vqkx51"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_7wdxc"]
-[ext_resource type="Script" path="res://ChatRoom/Member.cs" id="2_a7gb6"]
+[ext_resource type="Script" uid="uid://dq0nfgkdvukta" path="res://ChatRoom/Member.cs" id="2_a7gb6"]
 
 [node name="Member" type="HBoxContainer"]
 offset_right = 356.0

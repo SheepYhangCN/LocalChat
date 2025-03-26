@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu5ucrk0ggc8y"]
 
-[ext_resource type="Script" path="res://ip.cs" id="1_gk3ve"]
+[ext_resource type="Script" uid="uid://cewxcate54fnw" path="res://ip.cs" id="1_gk3ve"]
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_ord5l"]
-[ext_resource type="Script" path="res://Menu.cs" id="2_fual7"]
-[ext_resource type="Script" path="res://LineEdit1.cs" id="4_pcdne"]
+[ext_resource type="Script" uid="uid://cwxuf4har8b2f" path="res://Menu.cs" id="2_fual7"]
+[ext_resource type="Script" uid="uid://ba1x7ysan3831" path="res://LineEdit1.cs" id="4_pcdne"]
 [ext_resource type="FontFile" uid="uid://dkfrthtudolt0" path="res://Fonts/unifont.otf" id="5_k4xlc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1x2ok"]

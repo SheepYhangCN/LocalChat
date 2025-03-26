@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cl855nur4wyah"]
 
 [ext_resource type="Theme" uid="uid://bog7fmp8wgt7w" path="res://Theme.tres" id="1_32wmn"]
-[ext_resource type="Script" path="res://ChatRoom/Message.cs" id="2_gn2uh"]
+[ext_resource type="Script" uid="uid://qsqpvpyegucg" path="res://ChatRoom/Message.cs" id="2_gn2uh"]
 
 [node name="Message" type="HBoxContainer"]
 anchors_preset = 15
