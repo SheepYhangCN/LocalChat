@@ -1,6 +1,8 @@
 using Godot;
 using System;
+#if WINDOWS
 using Microsoft.Toolkit.Uwp.Notifications;
+#endif
 
 public partial class AutoLoad : Node
 {
@@ -21,10 +23,12 @@ public partial class AutoLoad : Node
 
 	public override void _Notification(int what)
 	{
-	    if (OS.GetName() == "Windows" && what == NotificationWMCloseRequest)
+	    if (what == NotificationWMCloseRequest)
 		{
+			#if WINDOWS
 			ToastNotificationManagerCompat.History.Clear();
 			ToastNotificationManagerCompat.Uninstall();
+			#endif
 		}
 	}
 }

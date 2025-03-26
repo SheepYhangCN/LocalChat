@@ -2,7 +2,9 @@ using Godot;
 using Godot.Collections;
 using System;
 using GodotTask;
+#if WINDOWS
 using Microsoft.Toolkit.Uwp.Notifications;
+#endif
 
 public partial class ChatRoom : Control
 {
@@ -170,8 +172,7 @@ public partial class ChatRoom : Control
 			GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
 			if (GetNode<AutoLoad>("/root/AutoLoad").notification && !GetWindow().HasFocus())
 			{
-				if (OS.GetName() == "Windows")
-				{
+				#if WINDOWS
 					new ToastContentBuilder()
 						.AddArgument("action", "viewConversation")
    						.AddArgument("conversationId", 9813)
@@ -180,7 +181,7 @@ public partial class ChatRoom : Control
 						.AddText(message)
 						.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 						.Show();
-				}
+				#endif
 				if (OS.GetName() == "Linux")
 				{
 					OS.Execute("bash",["notify-send",name+" ("+peer.ToString()+")",message]);
@@ -235,8 +236,7 @@ public partial class ChatRoom : Control
 			image.GetImage().SavePng("user://SavedImages/"+datetime+".png");
 			if (GetNode<AutoLoad>("/root/AutoLoad").notification && !GetWindow().HasFocus())
 			{
-				if (OS.GetName() == "Windows")
-				{
+				#if WINDOWS
 					new ToastContentBuilder()
 						.AddArgument("action", "viewConversation")
    						.AddArgument("conversationId", 9813)
@@ -245,7 +245,7 @@ public partial class ChatRoom : Control
 						.AddInlineImage(new Uri(ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png")))
 						.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 						.Show();
-				}
+				#endif
 				if (OS.GetName() == "Linux")
 				{
 					OS.Execute("bash",["notify-send","-i",ProjectSettings.GlobalizePath("user://SavedImages"+datetime+".png"),name+" ("+peer.ToString()+")"]);
@@ -265,8 +265,7 @@ public partial class ChatRoom : Control
 		var timed=Time.GetDatetimeDictFromSystem(false);
 		if (notification && GetNode<AutoLoad>("/root/AutoLoad").notification && !GetWindow().HasFocus())
 		{
-			if (OS.GetName() == "Windows")
-			{
+			#if WINDOWS
 				new ToastContentBuilder()
 					.AddArgument("action", "viewConversation")
    					.AddArgument("conversationId", 9813)
@@ -275,7 +274,7 @@ public partial class ChatRoom : Control
 					.AddText(message)
 					.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 					.Show();
-			}
+			#endif
 			if (OS.GetName() == "Linux")
 			{
 				OS.Execute("bash",["notify-send",TranslationServer.Translate("locNewSystemMessage"),message]);
@@ -429,8 +428,7 @@ public partial class ChatRoom : Control
 		RpcId(-peer,"SendSystemMessage",GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name),true);
 		if (GetNode<AutoLoad>("/root/AutoLoad").notification && !GetWindow().HasFocus())
 		{
-			if (OS.GetName() == "Windows")
-			{
+			#if WINDOWS
 				new ToastContentBuilder()
 					.AddArgument("action", "viewConversation")
    					.AddArgument("conversationId", 9813)
@@ -439,7 +437,7 @@ public partial class ChatRoom : Control
 					.AddText(GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name))
 					.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 					.Show();
-			}
+			#endif
 			if (OS.GetName() == "Linux")
 			{
 				OS.Execute("bash",["notify-send",TranslationServer.Translate("locYouWasPinged"),TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text),GetNode<AutoLoad>("/root/AutoLoad").name+TranslationServer.Translate("locPinged").ToString().Replace("{BY}",name)]);

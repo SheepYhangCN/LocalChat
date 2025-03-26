@@ -1,6 +1,8 @@
 using Godot;
 using System;
+#if WINDOWS
 using Microsoft.Toolkit.Uwp.Notifications;
+#endif
 
 public partial class Menu : Control
 {
@@ -48,8 +50,7 @@ public partial class Menu : Control
 			}
 			if (autoload.notification && !GetWindow().HasFocus())
 			{
-				if (OS.GetName() == "Windows")
-				{
+				#if WINDOWS
 					var timed=Time.GetDatetimeDictFromSystem(false);
 					new ToastContentBuilder()
 						.AddArgument("action", "viewConversation")
@@ -58,7 +59,7 @@ public partial class Menu : Control
 						.AddText(TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text))
 						.AddCustomTimeStamp(new DateTime((int)timed["year"],(int)timed["month"],(int)timed["day"],(int)timed["hour"],(int)timed["minute"],(int)timed["second"],DateTimeKind.Local))
 						.Show();
-				}
+				#endif
 				if (OS.GetName() == "Linux")
 				{
 					OS.Execute("bash",["notify-send",TranslationServer.Translate(autoload.popup == 1 ? "locBackedToMenu" : "locConnectFailed"),TranslationServer.Translate(GetNode<Label>("Popup/PanelContainer/Label").Text)]);
