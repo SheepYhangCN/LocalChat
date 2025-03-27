@@ -15,7 +15,7 @@ My teachers are really fond of unplugging the network cable between switcher and
 MIT License
 
 ## Used Things
-Godot Engine 4.3 - Juan Linietsky, Ariel Manzur and contributors<br>
+Godot Engine 4.4.1 - Juan Linietsky, Ariel Manzur and contributors<br>
 .NET 8 SDK - Microsoft<br>
 Visual Studio Code - Microsoft<br>
 Inno Setup - Jordan Russell and Martijn Laan<br>
