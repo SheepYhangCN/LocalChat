@@ -27,6 +27,7 @@ jobs:
     - name: Install Wine
       id: wine_install
       run: |
+        sudo apt update
         sudo apt install wine64
         echo "WINE_PATH=$(which wine64)" >> $GITHUB_OUTPUT
   
