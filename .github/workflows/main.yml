@@ -73,7 +73,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Linux X11 x86_64
-        path: ${{ steps.export.outputs.archive_directory }}/LinuxX11 x86_32.zip
+        path: ${{ steps.export.outputs.archive_directory }}/LinuxX11 x86_64.zip
     - name: Upload artifacts (Linux/X11 x86_32)
       uses: actions/upload-artifact@v4
       with:
